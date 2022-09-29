@@ -21,7 +21,7 @@ Ce qui marche:
 A creuser : 
 - le build client et le build serveur et les adapters (static/node) : comment distinguer pour chaque app (cliente et serveur) les sources ?
 - comment déployer le back ? 
-- est-ce qu'il faut revoir le déploiement du front si on a un back node ? 
+- est-ce qu'il faut revoir le déploiement du front si on a un back node ? (pour l'instant les fronts sont générés en statique et servis par nginx)
 
 
 # create-svelte
