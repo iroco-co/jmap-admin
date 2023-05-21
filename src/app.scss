@@ -1,0 +1,51 @@
+@use '../node_modules/@iroco/ui/scss/colors';
+@use '../node_modules/@iroco/ui/scss/fonts';
+@use '../node_modules/@iroco/ui/scss/style';
+
+*,
+*::before,
+*::after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a,
+a:visited,
+a:active,
+button {
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.navigation,
+.navigation--mobile,
+.nav__sidebar {
+	background-color: colors.$darkBlue;
+}
+
+a {
+	color: colors.$green;
+}
+
+p.error {
+	color: colors.$red;
+}
+
+html {
+	margin: 0;
+	padding: 0;
+
+	> body {
+		@include fonts.Arial(14px, colors.$beige);
+		line-height: 1.7em;
+		margin: 0;
+		padding: 0;
+		cursor: default;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-kerning: normal;
+		background: colors.$darkBlue;
+	}
+}
