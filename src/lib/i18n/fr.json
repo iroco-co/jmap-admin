@@ -1,1 +1,48 @@
-{}
+{
+  "login": {
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "errors": {
+      "empty_email": "Renseignez votre adresse email",
+      "invalid_email": "Votre email n'est pas valide",
+      "empty_password": "Renseignez votre mot de passe"
+    },
+    "connection": "Connexion",
+    "inscription": "Inscription",
+    "lost_password": "Mot de passe perdu ?"
+  },
+  "signup": {
+    "title": "Création de compte",
+    "already_have_account": "Vous avez déjà un compte ?",
+    "choice": "Choisissez votre nom de domaine",
+    "email": "Choisissez votre adresse mail",
+    "username": "Nom d'utilisateur",
+    "your_email": "Votre email",
+    "password": "Choisissez votre mot de passe",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "repeat_password": "Confirmez votre mot de passe",
+    "choice_subscription": "Abonnement",
+    "for": "pour",
+    "month": "mois",
+    "redirection": "Lorsque vous aurez complété l'intégralité du formulaire, vous serez redirigé vers le site de GoCardless, notre prestataire de paiement, afin de procéder à la mise en place de la souscription d'abonnement par mandat SEPA. Le montant de votre abonnement transitera par le compte en banque de notre prestataire de paiement : ce sont leurs coordonnées bancaires qui apparaîtront sur votre relevé de compte.",
+    "submit": "Créer le compte",
+    "terms": {
+      "title": "En cliquant sur le bouton ci-dessous, vous confirmez avoir pris connaissance et avoir accepté nos",
+      "link": " Conditions Générales de vente"
+    },
+    "names": "Nous avons besoin de vos nom et prénom pour envoyer à notre prestataire de paiement, GoCardless",
+    "errors": {
+      "empty_username": "Veuillez renseigner votre nom d'utilisateur",
+      "invalid_username": "Le nom d'utilisateur est invalide cf <a target='_blank' href='https://iroco.co/offers#emailsyntax'>notre FAQ</a>",
+      "not_the_same_password": "Les deux mots de passe ne correspondent pas",
+      "server": "Erreur sur le serveur",
+      "unavailable_email": "L'email {email} n'est pas disponible. Vous pouvez essayer : {emails}",
+      "pass_less_than_8": "Votre mot de passe doit faire au moins 8 caractères.",
+      "pass_has_uppercase_letter": "Votre mot de passe doit contenir au moins une majuscule.",
+      "pass_has_lowercase_letter": "Votre mot de passe doit contenir au moins une minuscule.",
+      "pass_has_number": "Votre mot de passe doit contenir au moins un chiffre.",
+      "pass_has_special_char": "Votre mot de passe doit contenir au moins un caractère spécial."
+    }
+  }
+}

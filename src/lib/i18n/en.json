@@ -1,1 +1,48 @@
-{}
+{
+  "login": {
+    "email": "Email address",
+    "password": "Password",
+    "errors": {
+      "empty_email": "We need your email",
+      "invalid_email": "Your email is invalid",
+      "empty_password": "We need your password"
+    },
+    "connection": "Sign In",
+    "inscription": "Sign Up",
+    "lost_password": "Lost your password?"
+  },
+  "signup": {
+    "title": "Sign up to Iroco",
+    "already_have_account": "Already have an account?",
+    "choice": "Choose your extension",
+    "email": "Email",
+    "username": "Username",
+    "your_email": "Your email",
+    "password": "Password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "repeat_password": "Repeat your password",
+    "choice_subscription": "Subscription",
+    "for": "for",
+    "month": "month",
+    "redirection": "Once you have completed and submitted the form, you will be redirected to the website of GoCardless, our payment provider, in order to proceed with the subscription by SEPA mandate. Your subscription will transit through the bank account of our payment provider: therefore, it is their bank details that will appear as the creditor on your bank statement.",
+    "submit": "Submit",
+    "terms": {
+      "title": "By clicking on the button above, you agree to our",
+      "link": " Terms and Conditions"
+    },
+    "names": "Our payment provider requires your ",
+    "errors": {
+      "empty_username": "Username cannot be empty",
+      "invalid_username": "Invalid username (see <a target='_blank' href='https://iroco.co/offers#emailsyntax'>our FAQ</a>)",
+      "not_the_same_password": "The passwords do not match",
+      "server": "Server error",
+      "unavailable_email": "The email {email} is not available. Try this : {emails}",
+      "pass_less_than_8": "The password should have at least 8 characters.",
+      "pass_has_uppercase_letter": "The password must have at least one uppercase letter.",
+      "pass_has_lowercase_letter": "The password must have at least one lowercase letter.",
+      "pass_has_number": "The password must have at least one number.",
+      "pass_has_special_char": "The password must have at least one special character."
+    }
+  }
+}
