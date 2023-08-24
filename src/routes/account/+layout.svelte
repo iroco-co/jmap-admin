@@ -18,6 +18,11 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
+			hrefOrCallback: '/account/dns',
+			name: $_('sidebar.dns'),
+			type: NavigationItemType.ANCHOR
+		},
+		{
 			hrefOrCallback: '/account/payment',
 			name: $_('sidebar.payment'),
 			type: NavigationItemType.ANCHOR
