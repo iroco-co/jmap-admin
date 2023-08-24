@@ -33,7 +33,7 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/logout',
+			hrefOrCallback: '/account/logout',
 			name: $_('sidebar.logout'),
 			type: NavigationItemType.FORM
 		}
