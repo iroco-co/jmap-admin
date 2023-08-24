@@ -34,9 +34,10 @@
     "names": "Our payment provider requires your ",
     "errors": {
       "empty_username": "Username cannot be empty",
-      "invalid_username": "Invalid username (see <a target='_blank' href='https://iroco.co/offers#emailsyntax'>our FAQ</a>)",
+      "invalid_username": "Invalid username (see <a target='_blank' href='https://iroco.co/faq#emailsyntax'>our FAQ</a>)",
       "not_the_same_password": "The passwords do not match",
       "server": "Server error",
+      "invalid_domain_name": "Domain name should be of the form domain.extension",
       "unavailable_email": "The email {email} is not available. Try this : {emails}",
       "pass_less_than_8": "The password should have at least 8 characters.",
       "pass_has_uppercase_letter": "The password must have at least one uppercase letter.",

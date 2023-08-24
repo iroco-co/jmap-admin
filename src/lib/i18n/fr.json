@@ -34,9 +34,10 @@
     "names": "Nous avons besoin de vos nom et prénom pour envoyer à notre prestataire de paiement, GoCardless",
     "errors": {
       "empty_username": "Veuillez renseigner votre nom d'utilisateur",
-      "invalid_username": "Le nom d'utilisateur est invalide cf <a target='_blank' href='https://iroco.co/offers#emailsyntax'>notre FAQ</a>",
+      "invalid_username": "Le nom d'utilisateur est invalide cf <a target='_blank' href='https://iroco.co/faq#emailsyntax'>notre FAQ</a>",
       "not_the_same_password": "Les deux mots de passe ne correspondent pas",
       "server": "Erreur sur le serveur",
+      "invalid_domain_name": "Le nom de domaine est de la forme domaine.extension",
       "unavailable_email": "L'email {email} n'est pas disponible. Vous pouvez essayer : {emails}",
       "pass_less_than_8": "Votre mot de passe doit faire au moins 8 caractères.",
       "pass_has_uppercase_letter": "Votre mot de passe doit contenir au moins une majuscule.",

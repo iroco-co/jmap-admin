@@ -1,39 +1,29 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { Button, RadioButton, TextInput } from '@iroco/ui'
+  import { Button, TextInput } from '@iroco/ui'
   import Logo from '../../lib/Logo.svelte'
   import { isEmpty } from 'lodash-es'
   import { enhance } from '$app/forms'
-  import { checkPassword, checkUsername } from '$lib/validation'
+  import { checkDomainName, checkPassword, checkUsername } from "$lib/validation";
   import { FormStatus } from '../../domain.js'
 
-  let emailExtension = '@iroco.co'
-  let username = null
-  let password = null
+  let domainName: string|null = null
+  let username: string|null = null
+  let password: string|null = null
   let repeatPassword = ''
   let email = ''
   let buttonDisabled: boolean
-  let emailAvailable: boolean
-  let usernameValidationPromise: Promise<string> = new Promise(() => '')
   let repeatPasswordFocused = false
   let checkPasswordKey: string | null
   let termsChecked = false
   export let form: FormData
 
-  export let delay = function (fn: (emailParameter: string) => void, ms: number): (args) => void {
-    let timer
-    return function (emailParameter) {
-      clearTimeout(timer)
-      timer = setTimeout(fn.bind(this, emailParameter), ms || 0)
-    }
-  }
-
-  $: email = (username === null ? '' : username) + emailExtension
+  $: email = (username === null ? '' : username) + '@' + domainName
   $: checkPasswordKey = checkPassword(password)
-  $: checkUsernameKey = checkUsername(username, email)
+  $: checkUsernameKey = checkUsername(username)
+  $: checkDomainNameKey = checkDomainName(domainName)
   $: buttonDisabled =
-    checkUsername(username, email) != null ||
-    !emailAvailable ||
+    checkUsername(username) != null ||
     isEmpty(password) ||
     password !== repeatPassword ||
     !termsChecked
@@ -48,46 +38,34 @@
 
   <form class="signup__form iroco-ui-form" method="POST" use:enhance>
     <input type="hidden" name="email" value={email} />
-    <section class="signup__form__extension">
-      <span class="iroco-ui-label">{$_('signup.choice')}</span>
-      <div class="signup__form__extension__group two-columns">
-        <div class="signup__form__extension__group__item">
-          <RadioButton bind:group={emailExtension} value="@iroco.co">
-            <span>iroco.co</span>
-          </RadioButton>
-        </div>
-        <div class="signup__form__extension__group__item">
-          <RadioButton bind:group={emailExtension} value="@iroco.io">
-            <span>iroco.io</span>
-          </RadioButton>
-        </div>
-      </div>
-    </section>
-
-    <span class="iroco-ui-label">{$_('signup.email')}</span>
     <section class="signup__form__username two-columns">
       <div>
         <TextInput
+          label={$_('signup.email')}
           bind:value={username}
           id="username"
           placeholder={$_('signup.username')}
           htmlError={true}
           error={checkUsernameKey === null ? null : $_(checkUsernameKey)}
         />
-        {#await usernameValidationPromise then error_message}
-          <p class="error">
-            {error_message}
-          </p>
-        {/await}
       </div>
       <div>
         <TextInput
-          bind:value={emailExtension}
+          label={$_('signup.choice')}
+          bind:value={domainName}
           id="emailExtension"
-          placeholder={emailExtension}
-          readonly={true}
+          placeholder={$_('signup.choice')}
+          error={checkDomainNameKey === null ? null : $_(checkDomainNameKey)}
         />
       </div>
+    </section>
+
+    <section class="signup__form__email">
+      <span>
+        {#if !isEmpty(domainName)}
+          {email}
+        {/if}
+      </span>
     </section>
 
     <section class="signup__form__password two-columns">
