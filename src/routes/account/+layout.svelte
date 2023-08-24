@@ -13,13 +13,13 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/payment',
-			name: $_('sidebar.payment'),
+			hrefOrCallback: '/account/users',
+			name: $_('sidebar.users'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/users',
-			name: $_('sidebar.users'),
+			hrefOrCallback: '/account/payment',
+			name: $_('sidebar.payment'),
 			type: NavigationItemType.ANCHOR
 		},
 		{

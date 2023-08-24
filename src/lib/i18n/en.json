@@ -1,4 +1,7 @@
 {
+  "account": {
+    "title": "Dashboard"
+  },
   "login": {
     "email": "Email address",
     "password": "Password",
@@ -45,5 +48,11 @@
       "pass_has_number": "The password must have at least one number.",
       "pass_has_special_char": "The password must have at least one special character."
     }
+  },
+  "sidebar": {
+    "account": "Account",
+    "payment": "Payment",
+    "users": "Users",
+    "logout": "Logout"
   }
 }

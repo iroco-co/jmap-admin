@@ -1,4 +1,7 @@
 {
+  "account": {
+    "title": "Tableau de bord"
+  },
   "login": {
     "email": "Adresse email",
     "password": "Mot de passe",
@@ -45,5 +48,11 @@
       "pass_has_number": "Votre mot de passe doit contenir au moins un chiffre.",
       "pass_has_special_char": "Votre mot de passe doit contenir au moins un caractère spécial."
     }
+  },
+  "sidebar": {
+    "account": "Compte",
+    "payment": "Paiement",
+    "users": "Utilisateurs",
+    "logout": "Déconnexion"
   }
 }
