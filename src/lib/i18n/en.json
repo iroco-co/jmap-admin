@@ -52,6 +52,7 @@
   "sidebar": {
     "account": "Account",
     "users": "Users",
+    "aliases": "Aliases",
     "dns": "DNS",
     "payment": "Payment",
     "logout": "Logout"
