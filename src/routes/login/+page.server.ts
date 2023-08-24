@@ -14,7 +14,7 @@ export const actions: Actions = {
     const data = await request.formData()
     const email = data.get('email')
     const password = data.get('password')
-    const redirectUrl = data.get('redirect_url') ?? '/'
+    const redirectUrl = data.get('redirect_url') ?? '/account'
 
     if (!email) {
       return fail(400, { email, status: FormStatus.Error, code: 'login.errors.empty_email' })

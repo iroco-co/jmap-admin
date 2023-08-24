@@ -1,27 +1,30 @@
 <script lang="ts">
 	import { Navigation, NavigationItemType } from '@iroco/ui'
 	import { _ } from 'svelte-i18n'
-	import type { PageData } from '../../../.svelte-kit/types/src/routes'
+	import type { PageData } from './$types'
 	export let data: PageData
 </script>
 
 <Navigation
 	navigationItems={[
 		{
-			hrefOrCallback: '/app/account',
-			name: $_('sidebar.account')
+			hrefOrCallback: '/account',
+			name: $_('sidebar.account'),
+			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/app/account/payment',
-			name: $_('sidebar.payment')
+			hrefOrCallback: '/account/payment',
+			name: $_('sidebar.payment'),
+			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/app/account/aliases',
-			name: $_('account.sidebar.aliases')
+			hrefOrCallback: '/account/users',
+			name: $_('sidebar.users'),
+			type: NavigationItemType.ANCHOR
 		},
 		{
 			hrefOrCallback: '/logout',
-			name: $_('account.sidebar.logout'),
+			name: $_('sidebar.logout'),
 			type: NavigationItemType.FORM
 		}
 	]}
@@ -35,7 +38,7 @@
 </main>
 
 <style lang="scss">
-	@use 'colors';
+	@use 'node_modules/@iroco/ui/scss/colors';
 	:global html > body {
 		background: colors.$nightBlue;
 		.navigation,
