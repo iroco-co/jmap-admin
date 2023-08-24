@@ -12,6 +12,7 @@ import type {
 import { Role } from '../../domain'
 import dayjs from 'dayjs'
 import type { EventType } from '../../domain'
+import knex from "knex";
 
 export class Repository {
   db: Knex<any, unknown[]>
@@ -137,5 +138,13 @@ export class Repository {
 
   async getEvent(type: EventType, email: string): Promise<UserEvent | undefined> {
     return this.db('event').select().where('type', type).where('user_id', email).first()
+  }
+
+  async saveUserAndDomain(user: FullUser, domain: string) {
+    return this.db.transaction(async trx => {
+      const result = await this.db('virtual_domain').insert<VirtualDomain>({ name: domain }).transacting(trx).returning('id');
+      user.vdomain_id = result.id
+      await this.db('user').insert<FullUser>(user).transacting(trx);
+    })
   }
 }

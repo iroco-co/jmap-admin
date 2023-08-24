@@ -10,10 +10,13 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:watch": "vitest test/route test/lib",
 		"test:integration": "vitest --run --threads false test/integration",
-		"test": "vitest --run test/route test/lib",
+		"test": "vitest --run",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"clean": "rm -rf .svelte-kit build && npm cache clean --force"
+		"clean": "rm -rf .svelte-kit build && npm cache clean --force",
+		"db:dev": "NODE_ENV=dev knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=dev knex --knexfile src/db/knexfile.mjs seed:run",
+		"db:preprod": "NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs seed:run",
+		"db:test": "NODE_ENV=test knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=test knex --knexfile src/db/knexfile.mjs seed:run"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "1.0.0",
