@@ -1,7 +1,4 @@
 {
-  "account": {
-    "title": "Tableau de bord"
-  },
   "login": {
     "email": "Adresse email",
     "password": "Mot de passe",
@@ -56,5 +53,11 @@
     "dns": "DNS",
     "payment": "Paiement",
     "logout": "Déconnexion"
+  },
+  "account": {
+    "title": "Tableau de bord",
+    "dns": {
+      "title": "Configuration de la zone DNS"
+    }
   }
 }

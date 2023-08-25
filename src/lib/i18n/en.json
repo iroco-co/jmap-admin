@@ -1,7 +1,4 @@
 {
-  "account": {
-    "title": "Dashboard"
-  },
   "login": {
     "email": "Email address",
     "password": "Password",
@@ -56,5 +53,11 @@
     "dns": "DNS",
     "payment": "Payment",
     "logout": "Logout"
+  },
+  "account": {
+    "title": "Dashboard",
+    "dns": {
+      "title": "DNS Zone configuration"
+    }
   }
 }
