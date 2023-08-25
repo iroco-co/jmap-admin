@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Navigation, NavigationItemType } from '@iroco/ui'
-	import { _ } from 'svelte-i18n'
-	import type { PageData } from './$types'
-	export let data: PageData
+	import { Navigation, NavigationItemType } from '@iroco/ui';
+	import { _ } from 'svelte-i18n';
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
 <Navigation

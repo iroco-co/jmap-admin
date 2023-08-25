@@ -1,10 +1,11 @@
 # Premier test fullstack svelte
 
-C'est le _future_ dépôt pour l'interface d'adminstration qui permettra à un admin de : 
+C'est le _future_ dépôt pour l'interface d'adminstration qui permettra à un admin de :
+
 - créer et supprimer des emails
 - créer et supprimer des calendriers
 - créer et supprimer des carnets d'adresse
-- créer et supprimer des dossiers partagés 
+- créer et supprimer des dossiers partagés
 - gérer les droits pour les calendriers/carnets d'adresse
 - administrer le(s) nom(s) de domaine (clés TLS, DNS, page d'accueil HTTP)
 - attribuer ou supprimer des droits d'administration à d'autres adresses mail
@@ -16,13 +17,14 @@ L'architecture sera basée sur SvelteKit en back et front en typescript, avec po
 Pour le moment il s'agit uniquement d'un POC svelte full stack pour voir comment ça se comporte.
 
 Ce qui marche:
+
 - le site en mode développement (`npm run dev`)
 
-A creuser : 
-- le build client et le build serveur et les adapters (static/node) : comment distinguer pour chaque app (cliente et serveur) les sources ?
-- comment déployer le back ? 
-- est-ce qu'il faut revoir le déploiement du front si on a un back node ? (pour l'instant les fronts sont générés en statique et servis par nginx)
+A creuser :
 
+- le build client et le build serveur et les adapters (static/node) : comment distinguer pour chaque app (cliente et serveur) les sources ?
+- comment déployer le back ?
+- est-ce qu'il faut revoir le déploiement du front si on a un back node ? (pour l'instant les fronts sont générés en statique et servis par nginx)
 
 # create-svelte
 

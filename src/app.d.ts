@@ -5,14 +5,14 @@
 declare namespace App {
 	// interface Error {}
 	interface Locals {
-		user: import('./domain').User
-		email: string
-		lang: string
-		version: string
+		user: import('./domain').User;
+		email: string;
+		lang: string;
+		version: string;
 	}
 	interface FormData {
-		status: import('./domain').FormStatus
-		code: string
+		status: import('./domain').FormStatus;
+		code: string;
 	}
 	// interface PageData {}
 	// interface Platform {}

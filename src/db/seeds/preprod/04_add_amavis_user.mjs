@@ -53,5 +53,5 @@ export const seed = async (knex) => {
 			vdomain_id: 1,
 			role: 2
 		}
-	])
-}
+	]);
+};

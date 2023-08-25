@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
-  import type PageData from '@sveltejs/kit'
-  export let data: PageData
+	import { _ } from 'svelte-i18n';
+	import type PageData from '@sveltejs/kit';
+	export let data: PageData;
 </script>
 
 <section class="account__dns">
-  <h1>{$_('account.dns.title')}</h1>
-  <pre>
+	<h1>{$_('account.dns.title')}</h1>
+	<pre>
     @                       IN MX     2 smtp
     @                   600 IN TXT    "v=spf1 mx a:smtp.{data.name} ~all"
     smtp                    IN MX     5 smtp

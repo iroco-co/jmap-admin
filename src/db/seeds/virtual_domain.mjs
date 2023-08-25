@@ -1,5 +1,5 @@
 export const seed = async (knex) => {
-	await knex('virtual_domain').del()
+	await knex('virtual_domain').del();
 	await knex('virtual_domain').insert([
 		{
 			id: 1,
@@ -22,5 +22,5 @@ export const seed = async (knex) => {
 			dkim_private_key: 'private_iroco_io',
 			available: true
 		}
-	])
-}
+	]);
+};

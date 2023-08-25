@@ -1,5 +1,5 @@
-import pino from 'pino'
-import { PUBLIC_LOG_LEVEL } from '$env/static/public'
+import pino from 'pino';
+import { PUBLIC_LOG_LEVEL } from '$env/static/public';
 
 export const logger = pino({
 	name: 'iroco-app',
@@ -10,4 +10,4 @@ export const logger = pino({
 			colorize: false
 		}
 	}
-})
+});

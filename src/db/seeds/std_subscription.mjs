@@ -1,5 +1,5 @@
 export const seed = async (knex) => {
-	await knex('subscription').del()
+	await knex('subscription').del();
 	await knex('subscription').insert([
 		{
 			id: 1,
@@ -11,5 +11,5 @@ export const seed = async (knex) => {
 			quantity: '5368709120',
 			available: true
 		}
-	])
-}
+	]);
+};

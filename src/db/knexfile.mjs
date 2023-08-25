@@ -1,7 +1,7 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-dotenv.config()
-dotenv.config({ path: `.env.${process.env.NODE_ENV}.local`, override: true })
+dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}.local`, override: true });
 function localDatabase(host, dbname, seedPath) {
 	return {
 		client: 'postgresql',
@@ -24,7 +24,7 @@ function localDatabase(host, dbname, seedPath) {
 			directory: seedPath,
 			loadExtensions: ['.js', '.mjs', '.cjs']
 		}
-	}
+	};
 }
 
 /**
@@ -35,8 +35,8 @@ const config = {
 	dev: localDatabase('postgresql', 'iroco', './seeds'),
 	prod: localDatabase('localhost', 'iroco2', './seeds/prod'),
 	preprod: localDatabase('localhost', 'iroco2', './seeds/preprod')
-}
+};
 /** ignored by knex */
-export default config
+export default config;
 /** Named exports: or knex won't find them */
-export const { client, connection, useNullAsDefault, migrations, seeds } = config
+export const { client, connection, useNullAsDefault, migrations, seeds } = config;
