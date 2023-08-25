@@ -141,10 +141,10 @@ export class Repository {
 
   async saveUserAndDomain(user: FullUser, domain: VirtualDomain) {
     return this.db.transaction(async trx => {
-      const result = await this.db('virtual_domain').insert<VirtualDomain>(domain).
+      const results = await this.db('virtual_domain').insert<VirtualDomain>(domain).
                                             transacting(trx).
-                                            returning<Partial<VirtualDomain>>('id');
-      user.vdomain_id = <number>result.id
+                                            returning('id');
+      user.vdomain_id = results[0].id
       await this.db('user').insert<FullUser>(user).transacting(trx);
     })
   }

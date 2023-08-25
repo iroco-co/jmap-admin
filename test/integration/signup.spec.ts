@@ -52,6 +52,7 @@ test('signup should create a user with temporary status', async () => {
 	expect(actualDomain.dkim_private_key).toBeDefined()
 	expect(actualDomain.dkim_public_key).toBeDefined()
 	expect(actualDomain.available).toBeFalsy()
+	expect(actualUser.vdomain_id).toEqual(actualDomain.id)
 })
 
 test('signup should send an activation mail and password recovery code', async () => {

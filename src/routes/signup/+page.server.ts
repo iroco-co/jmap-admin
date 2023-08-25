@@ -32,18 +32,14 @@ export const actions: Actions = {
 			vdomain_id: 0
 		}
 		const dkimKeyPair = await generateOpendkim()
-		try {
-			await repository.saveUserAndDomain(user,
-				{
-					name: getEmailDomain(email),
-					dkim_selector: 'dkim',
-					dkim_private_key: dkimKeyPair.privateKey,
-					dkim_public_key: dkimKeyPair.publicKey,
-					available: false
-				})
-		} catch (e) {
-			console.log(e)
-		}
+		await repository.saveUserAndDomain(user,
+			{
+				name: getEmailDomain(email),
+				dkim_selector: 'dkim',
+				dkim_private_key: dkimKeyPair.privateKey,
+				dkim_public_key: dkimKeyPair.publicKey,
+				available: false
+			})
 
 		let result = await mailer.sendMail(activationMail(email, await createSignupJwt(user)))
 		logger.info('activation message sent: %s', result.messageId)
