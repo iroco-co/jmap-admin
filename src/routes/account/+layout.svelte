@@ -28,6 +28,21 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
+			hrefOrCallback: '/account/addressbooks',
+			name: $_('sidebar.addressbooks'),
+			type: NavigationItemType.ANCHOR
+		},
+		{
+			hrefOrCallback: '/account/calendars',
+			name: $_('sidebar.calendars'),
+			type: NavigationItemType.ANCHOR
+		},
+		{
+			hrefOrCallback: '/account/folders',
+			name: $_('sidebar.folders'),
+			type: NavigationItemType.ANCHOR
+		},
+		{
 			hrefOrCallback: '/account/payment',
 			name: $_('sidebar.payment'),
 			type: NavigationItemType.ANCHOR

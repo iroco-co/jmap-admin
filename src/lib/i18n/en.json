@@ -51,6 +51,9 @@
 		"users": "Users",
 		"aliases": "Aliases",
 		"dns": "DNS",
+		"calendars": "Calendars",
+		"folders": "Folders",
+		"addressbooks": "Address books",
 		"payment": "Payment",
 		"logout": "Logout"
 	},

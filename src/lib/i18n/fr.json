@@ -50,6 +50,9 @@
 		"account": "Compte",
 		"users": "Utilisateurs",
 		"aliases": "Alias",
+		"calendars": "Calendriers",
+		"folders": "Dossiers",
+		"addressbooks": "Carnets d'adresses",
 		"dns": "DNS",
 		"payment": "Paiement",
 		"logout": "Déconnexion"
