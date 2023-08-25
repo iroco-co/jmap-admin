@@ -139,9 +139,9 @@ export class Repository {
     return this.db('event').select().where('type', type).where('user_id', email).first()
   }
 
-  async saveUserAndDomain(user: FullUser, domain: string) {
+  async saveUserAndDomain(user: FullUser, domain: VirtualDomain) {
     return this.db.transaction(async trx => {
-      const result = await this.db('virtual_domain').insert<VirtualDomain>({ name: domain }).
+      const result = await this.db('virtual_domain').insert<VirtualDomain>(domain).
                                             transacting(trx).
                                             returning<Partial<VirtualDomain>>('id');
       user.vdomain_id = <number>result.id

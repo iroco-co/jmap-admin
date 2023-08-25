@@ -45,8 +45,13 @@ test('signup should create a user with temporary status', async () => {
 	expect(actualUser).toBeDefined()
 	expect(verifyPassword('password', actualUser.password)).toBeTruthy()
 	expect(actualUser.role).toEqual(Role.Temporary)
+
 	const actualDomain =  await repository.getDomain("bar.com")
 	expect(actualDomain).toBeDefined()
+	expect(actualDomain.dkim_selector).toEqual('dkim')
+	expect(actualDomain.dkim_private_key).toBeDefined()
+	expect(actualDomain.dkim_public_key).toBeDefined()
+	expect(actualDomain.available).toBeFalsy()
 })
 
 test('signup should send an activation mail and password recovery code', async () => {

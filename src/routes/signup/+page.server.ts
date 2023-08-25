@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit'
 import { repository } from '$lib/server/db'
 import type { FullUser } from '../../domain'
 import { FormStatus, Role } from '../../domain'
-import { createSignupJwt, hashPassword } from '$lib/crypto'
+import { createSignupJwt, generateOpendkim, hashPassword } from "$lib/crypto";
 import crypto from 'node:crypto'
 import { activationMail, getEmailDomain, passwordMail } from '$lib/email'
 import { mailer } from '$lib/server/mailer'
@@ -31,7 +31,19 @@ export const actions: Actions = {
 			creation_date: dayjs().toDate(),
 			vdomain_id: 0
 		}
-		await repository.saveUserAndDomain(user, getEmailDomain(email))
+		const dkimKeyPair = await generateOpendkim()
+		try {
+			await repository.saveUserAndDomain(user,
+				{
+					name: getEmailDomain(email),
+					dkim_selector: 'dkim',
+					dkim_private_key: dkimKeyPair.privateKey,
+					dkim_public_key: dkimKeyPair.publicKey,
+					available: false
+				})
+		} catch (e) {
+			console.log(e)
+		}
 
 		let result = await mailer.sendMail(activationMail(email, await createSignupJwt(user)))
 		logger.info('activation message sent: %s', result.messageId)

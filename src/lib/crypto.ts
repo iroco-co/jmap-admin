@@ -1,10 +1,11 @@
 import { sha512 } from 'sha512-crypt-ts'
-import type { JwtPayload, User } from '../domain'
+import type { JwtPayload, KeyPair, User } from "../domain";
 import { SignJWT } from 'jose'
 import dayjs from 'dayjs'
 import { Role } from '../domain'
 import { PUBLIC_TRIAL_PERIOD_DAYS } from '$env/static/public'
 import { env } from '$env/dynamic/private'
+import { generateKeyPair} from "crypto"
 
 const DELTA_JWT_ISSUANCE_SEC = 5
 
@@ -70,4 +71,30 @@ export function isSignupJwt(jwtPayload: JwtPayload): boolean {
 		jwtPayload.exp - jwtPayload.iat ===
 			Number(PUBLIC_TRIAL_PERIOD_DAYS) * 24 * 60 * 60 + DELTA_JWT_ISSUANCE_SEC
 	)
+}
+
+export function generateOpendkim(): Promise<KeyPair> {
+	return new Promise((resolve, reject) => {
+		generateKeyPair('rsa', {
+			modulusLength: 2048,
+			publicKeyEncoding: {
+				type: 'pkcs1',
+				format: 'pem'
+			},
+			privateKeyEncoding: {
+				type: 'pkcs1',
+				format: 'pem',
+			}
+		}, (error, publicKey, privateKey) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve({ publicKey, privateKey });
+			}
+		})
+	})
+}
+
+export function removePemMarks(key: string): string {
+	return key.replace(/[-]{5}[A-Z ]+[-]{5}/g, '').replace(/\n/g, '')
 }

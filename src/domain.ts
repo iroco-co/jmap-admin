@@ -48,8 +48,12 @@ export enum FormStatus {
 }
 
 export type VirtualDomain = {
-	id: number
+	id?: number
 	name: string
+	dkim_selector: string
+	dkim_private_key: string
+	dkim_public_key: string
+	available: boolean
 }
 
 export type Email = {
@@ -106,3 +110,8 @@ export enum EventType {
 
 export type GenericObject = { [key: string]: any }
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+
+export type KeyPair = {
+	publicKey: string
+	privateKey: string
+}
