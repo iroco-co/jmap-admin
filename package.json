@@ -29,6 +29,8 @@
 		"@types/smtp-server": "^3.5.7",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"csv-parse": "^5.5.0",
+		"dotenv": "^16.0.3",
 		"eslint": "8.22.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
@@ -50,10 +52,9 @@
 		"svelte-preprocess": "^4.10.7",
 		"ts-node": "^10.9.1",
 		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
+		"typescript": "^4.9.5",
 		"vite": "^4.0.0",
-		"vitest": "^0.28.4",
-		"dotenv": "^16.0.3"
+		"vitest": "^0.28.4"
 	},
 	"dependencies": {
 		"@iroco/ui": "^0.52.2",

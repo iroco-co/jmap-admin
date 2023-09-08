@@ -34,7 +34,8 @@ const config = {
 	test: localDatabase('postgresql', 'test', './seeds'),
 	dev: localDatabase('postgresql', 'iroco', './seeds'),
 	prod: localDatabase('localhost', 'iroco2', './seeds/prod'),
-	preprod: localDatabase('localhost', 'iroco2', './seeds/preprod')
+	preprod: localDatabase('localhost', 'iroco2', './seeds/preprod'),
+	bench: localDatabase('localhost', 'iroco2', './seeds/bench')
 };
 /** ignored by knex */
 export default config;
