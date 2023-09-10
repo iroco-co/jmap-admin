@@ -15,7 +15,7 @@ export const seed = async (knex) => {
     return {email: u.email, password: hashPassword(u.password), role: u.role, vdomain_id: u.vdomain_id}
   });
   await knex('user').insert(hashed_users);
-  await fs.writeFile('user.csv', getContent(users))
+  await fs.writeFile('users.csv', getContent(users))
 };
 
 function getContent(users) {
