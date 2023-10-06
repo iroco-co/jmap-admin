@@ -26,7 +26,7 @@
 </main>
 
 <style lang="scss">
-	@use '../../../node_modules/@iroco/ui/scss/colors';
+	@use 'node_modules/@iroco/ui/dist/scss/colors';
 	:global(.iroco-ui-input) {
 		margin-bottom: 1em;
 	}

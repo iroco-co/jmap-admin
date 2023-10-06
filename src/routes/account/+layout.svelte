@@ -63,7 +63,7 @@
 </main>
 
 <style lang="scss">
-	@use 'node_modules/@iroco/ui/scss/colors';
+	@use 'node_modules/@iroco/ui/dist/scss/colors';
 	:global html > body {
 		background: colors.$nightBlue;
 		.navigation,

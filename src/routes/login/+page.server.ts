@@ -5,8 +5,8 @@ import { FormStatus } from '../../domain';
 import { createJwt, verifyPassword } from '$lib/crypto';
 import { logger } from '$lib/server/logger';
 import { env } from '$env/dynamic/private';
-import dayjs from 'dayjs';
 import { PUBLIC_SESSION_DURATION_MN } from '$env/static/public';
+import { DateTime } from 'luxon';
 export const prerender = false;
 
 export const actions: Actions = {
@@ -27,13 +27,13 @@ export const actions: Actions = {
 		}
 
 		const secret = new TextEncoder().encode(env.JWT_SECRET);
-		const expirationDate = dayjs().add(Number(PUBLIC_SESSION_DURATION_MN), 'minutes').toDate();
-		const jwt = await createJwt(user, expirationDate, secret);
+		const expirationDate = DateTime.now().plus({ minutes: Number(PUBLIC_SESSION_DURATION_MN) });
+		const jwt = await createJwt(user, expirationDate.toUnixInteger(), secret);
 
 		cookies.set('Authorization', jwt, {
 			httpOnly: true,
 			secure: true,
-			expires: expirationDate,
+			expires: expirationDate.toJSDate(),
 			sameSite: 'lax',
 			path: '/'
 		});

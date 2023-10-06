@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { repository } from '../../src/lib/server/db';
 import { request } from 'svelte-kit-test-helpers';
 import { actions } from '../../src/routes/signup/+page.server';
@@ -37,6 +38,7 @@ test('signup should create a user with temporary status', async () => {
 			body: createForm({ email: 'foo@bar.com', password: 'password' })
 		});
 	} catch (response) {
+		console.log(response);
 		expect(response.status).toBe(307);
 		expect(response.location).toMatch(/signup_complete\?code=[0-9a-z-]+/);
 	}

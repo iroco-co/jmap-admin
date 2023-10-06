@@ -1,11 +1,11 @@
 import { sha512 } from 'sha512-crypt-ts';
 import type { JwtPayload, KeyPair, User } from '../domain';
 import { SignJWT } from 'jose';
-import dayjs from 'dayjs';
 import { Role } from '../domain';
 import { PUBLIC_TRIAL_PERIOD_DAYS } from '$env/static/public';
 import { env } from '$env/dynamic/private';
 import { generateKeyPair } from 'crypto';
+import { DateTime } from 'luxon';
 
 const DELTA_JWT_ISSUANCE_SEC = 5;
 
@@ -42,7 +42,7 @@ function randomSalt(): string {
 
 export async function createJwt(
 	user: User,
-	expirationDate: Date,
+	expirationDateUnixTs: number,
 	secret: Uint8Array
 ): Promise<string> {
 	const alg = 'HS512';
@@ -50,14 +50,17 @@ export async function createJwt(
 	return await new SignJWT({ role: user.role })
 		.setProtectedHeader({ typ, alg })
 		.setSubject(user.email)
-		.setIssuedAt(dayjs().add(-DELTA_JWT_ISSUANCE_SEC, 'second').unix())
+		.setIssuedAt(DateTime.now().toUTC().minus({ seconds: DELTA_JWT_ISSUANCE_SEC }).toUnixInteger())
 		.setIssuer('urn:iroco:issuer')
-		.setExpirationTime(Math.floor(expirationDate.getTime() / 1000))
+		.setExpirationTime(expirationDateUnixTs)
 		.sign(secret);
 }
 
 export async function createSignupJwt(user: User): Promise<string> {
-	const expirationDate = dayjs().add(Number(PUBLIC_TRIAL_PERIOD_DAYS), 'days').toDate();
+	const expirationDate = DateTime.now()
+		.toUTC()
+		.plus({ day: Number(PUBLIC_TRIAL_PERIOD_DAYS) })
+		.toUnixInteger();
 	const secret = new TextEncoder().encode(env.JWT_SECRET);
 	return createJwt(user, expirationDate, secret);
 }

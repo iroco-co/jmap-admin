@@ -10,11 +10,13 @@ import type {
 	BareUserEvent
 } from '../../domain';
 import { Role } from '../../domain';
-import dayjs from 'dayjs';
 import type { EventType } from '../../domain';
+import { DateTime } from 'luxon';
 
 export class Repository {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	db: Knex<any, unknown[]>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor(dataSource: Knex<any, unknown[]>) {
 		this.db = dataSource;
 	}
@@ -124,8 +126,8 @@ export class Repository {
 	): Promise<Array<Pick<User, 'email'>>> {
 		return this.db('user')
 			.select('email')
-			.where('creation_date', '<=', dayjs().add(-delayDays, 'days').toISOString())
-			.where('creation_date', '>', dayjs().add(-butNotMoreThan, 'days').toISOString())
+			.where('creation_date', '<=', DateTime.now().minus({ days: delayDays }).toISO())
+			.where('creation_date', '>', DateTime.now().minus({ days: butNotMoreThan }).toISO())
 			.where(function () {
 				this.where('role', Role.Temporary).orWhere('role', Role.Trial);
 			});

@@ -8,7 +8,7 @@ import crypto from 'node:crypto';
 import { activationMail, getEmailDomain, passwordMail } from '$lib/email';
 import { mailer } from '$lib/server/mailer';
 import { logger } from '$lib/server/logger';
-import dayjs from 'dayjs';
+import { DateTime } from 'luxon';
 
 export const prerender = false;
 
@@ -28,7 +28,7 @@ export const actions: Actions = {
 			firstname: '',
 			lastname: '',
 			role: Role.Temporary,
-			creation_date: dayjs().toDate(),
+			creation_date: DateTime.now().toJSDate(),
 			vdomain_id: 0
 		};
 		const dkimKeyPair = await generateOpendkim();

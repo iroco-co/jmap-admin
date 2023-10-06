@@ -1,3 +1,4 @@
+// @vitest-environment node
 import {
 	createSignupJwt,
 	generateOpendkim,
@@ -8,7 +9,6 @@ import {
 } from '../../src/lib/crypto';
 import { Role } from '../../src/domain';
 import type { User, JwtPayload } from '../../src/domain';
-import dayjs from 'dayjs';
 import { env } from '$env/dynamic/private';
 import { jwtVerify } from 'jose';
 
@@ -22,7 +22,7 @@ test('is JWT from signup', async () => {
 		firstname: '',
 		lastname: '',
 		role: Role.Temporary,
-		creation_date: dayjs().toDate(),
+		creation_date: new Date(),
 		vdomain_id: 1
 	};
 	const secret = new TextEncoder().encode(env.JWT_SECRET);
