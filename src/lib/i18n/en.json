@@ -61,6 +61,20 @@
 		"title": "Dashboard",
 		"dns": {
 			"title": "DNS Zone configuration"
+		},
+		"users": {
+			"title": "Users",
+			"modal": {
+				"title": "Create user",
+				"btn_save": "Save",
+				"btn_cancel": "Cancel",
+				"input_email": "Email",
+				"input_role": "Role",
+				"select_placeholder": "Please select",
+				"input_first_name": "First name",
+				"input_last_name": "Last name",
+				"input_password": "Password"
+			}
 		}
 	}
 }

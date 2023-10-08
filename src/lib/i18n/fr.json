@@ -61,6 +61,20 @@
 		"title": "Tableau de bord",
 		"dns": {
 			"title": "Configuration de la zone DNS"
+		},
+		"users": {
+			"title": "Utilisateurs",
+			"modal": {
+				"title": "Création d'un utilisateur",
+				"btn_save": "Enregistrer",
+				"btn_cancel": "Annuler",
+				"input_email": "Email",
+				"select_placeholder": "Sélectionnez",
+				"input_role": "Role",
+				"input_first_name": "Prénom",
+				"input_last_name": "Nom",
+				"input_password": "Mot de passe"
+			}
 		}
 	}
 }

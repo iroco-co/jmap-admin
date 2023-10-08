@@ -58,9 +58,9 @@
 	},
 	"dependencies": {
 		"@iroco/ui": "^0.60.2",
-		"luxon": "^3.4.3",
 		"jose": "^4.15.2",
 		"knex": "^2.3.0",
+		"luxon": "^3.4.3",
 		"nodemailer": "^6.8.0",
 		"pg": "^8.8.0",
 		"pg-native": "^3.0.1",
@@ -68,7 +68,9 @@
 		"pino-pretty": "^9.1.1",
 		"sha512-crypt-ts": "^0.1.27",
 		"svelte-awesome": "^3.0.1",
-		"svelte-i18n": "<3.7.3"
+		"svelte-i18n": "<3.7.3",
+		"svelte-select": "^5.7.0",
+		"svelte-table": "^0.6.1"
 	},
 	"lint-staged": {
 		"*.{js,ts,svelte}": [
