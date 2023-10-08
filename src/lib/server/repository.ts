@@ -153,7 +153,9 @@ export class Repository {
 	}
 
 	async getUsers(emailDomain: string) {
-		return this.db.select('*').from<User>('user')
+		return this.db
+			.select('*')
+			.from<User>('user')
 			.join('virtual_domain', 'user.vdomain_id', 'virtual_domain.id')
 			.where('virtual_domain.name', emailDomain);
 	}
