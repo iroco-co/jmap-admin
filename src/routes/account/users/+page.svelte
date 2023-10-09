@@ -10,11 +10,12 @@
 	export let data: PageData;
 	const rows = data.users;
 	let showModal = false;
-	let email: '';
-	let firstName: '';
-	let lastName: '';
-	let password: '';
+	let email = '';
+	let firstName = '';
+	let lastName = '';
+	let password = '';
 	let role: number = Role['User'];
+	let password_code = data.uuid;
 
 	let roleItems = Object.keys(Role)
 		.filter((v) => isNaN(Number(v)) && !v.startsWith('Super'))
@@ -75,17 +76,17 @@
 		<TextInput
 			label={$_('account.users.modal.input_email')}
 			bind:value={email}
-			id="email"
+			id="user_email"
 			placeholder={$_('account.users.modal.input_email')}
-			name="email"
+			name="user_email"
 			type="email"
 		/>
 		<TextInput
 			label={$_('account.users.modal.input_password')}
 			bind:value={password}
-			id="password"
+			id="user_password"
 			placeholder={$_('account.users.modal.input_password')}
-			name="password"
+			name="user_password"
 			type="password"
 		/>
 		<div class="iroco-ui-input">
@@ -94,7 +95,7 @@
 				items={roleItems}
 				bind:role
 				value="User"
-				id="select_role"
+				id="user_role"
 				placeholder={$_('account.users.modal.select_placeholder')}
 				class="account__users__roles"
 				--item-hover-bg={Color.mediumGrey}
@@ -103,19 +104,27 @@
 			/>
 		</div>
 		<TextInput
+			label={$_('account.users.modal.input_password_code')}
+			bind:value={password_code}
+			id="user_password_code"
+			placeholder={$_('account.users.modal.input_password_code')}
+			name="user_password_code"
+			type="text"
+		/>
+		<TextInput
 			label={$_('account.users.modal.input_first_name')}
 			bind:value={firstName}
-			id="first_name"
+			id="user_first_name"
 			placeholder={$_('account.users.modal.input_first_name')}
-			name="first_name"
+			name="user_first_name"
 			type="text"
 		/>
 		<TextInput
 			label={$_('account.users.modal.input_last_name')}
 			bind:value={lastName}
-			id="last_name"
+			id="user_last_name"
 			placeholder={$_('account.users.modal.input_last_name')}
-			name="last_name"
+			name="user_last_name"
 			type="text"
 		/>
 	</Modal>

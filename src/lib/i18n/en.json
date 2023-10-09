@@ -73,7 +73,8 @@
 				"select_placeholder": "Please select",
 				"input_first_name": "First name",
 				"input_last_name": "Last name",
-				"input_password": "Password"
+				"input_password": "Password",
+				"input_password_code": "Password recovery code"
 			}
 		}
 	}
