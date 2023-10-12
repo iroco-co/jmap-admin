@@ -1,30 +1,30 @@
 <script lang="ts">
 	/* eslint svelte/no-at-html-tags: "off" */
-	import { _, number } from 'svelte-i18n'
-	import { envelope } from 'svelte-awesome/icons'
-	import { Alert, Color } from '@iroco/ui'
+	import { _, number } from 'svelte-i18n';
+	import { envelope } from 'svelte-awesome/icons';
+	import { Alert, Color } from '@iroco/ui';
 
-	import type { PageData } from './$types'
-	import Icon from 'svelte-awesome'
-	import { PUBLIC_TRIAL_PERIOD_DAYS } from '$env/static/public'
-	import { DateTime } from 'luxon'
-	import { Role, FormStatus } from "../../domain";
-	import { humanSize } from "$lib/strings";
+	import type { PageData } from './$types';
+	import Icon from 'svelte-awesome';
+	import { PUBLIC_TRIAL_PERIOD_DAYS } from '$env/static/public';
+	import { DateTime } from 'luxon';
+	import { Role, FormStatus } from '../../domain';
+	import { humanSize } from '$lib/strings';
 
-	let temporaryAlertOpen = true
+	let temporaryAlertOpen = true;
 
 	function getRoleColor(role: Role) {
-		if (role == Role.Temporary) return Color.red
-		else if (role == Role.Trial) return Color.yellow
-		else if (role == Role.User) return Color.green
-		else if (role == Role.Admin) return Color.blue
-		else if (role == Role.SuperAdmin) return Color.beige
+		if (role == Role.Temporary) return Color.red;
+		else if (role == Role.Trial) return Color.yellow;
+		else if (role == Role.User) return Color.green;
+		else if (role == Role.Admin) return Color.blue;
+		else if (role == Role.SuperAdmin) return Color.beige;
 	}
-	export let data: PageData
-	const roleColor = getRoleColor(data.user.role)
+	export let data: PageData;
+	const roleColor = getRoleColor(data.user.role);
 	const daysLeft =
 		Number(PUBLIC_TRIAL_PERIOD_DAYS) +
-		Math.round(DateTime.fromJSDate(data.user.creation_date).diffNow('days').days)
+		Math.round(DateTime.fromJSDate(data.user.creation_date).diffNow('days').days);
 </script>
 
 <section class="account">
@@ -34,7 +34,7 @@
 			<Alert
 				type="flash"
 				callback={() => {
-					temporaryAlertOpen = false
+					temporaryAlertOpen = false;
 				}}
 			>
 				<h3>{$_('account.home.activate.title')}</h3>

@@ -1,25 +1,21 @@
 <script lang="ts">
 	import { _, time, date } from 'svelte-i18n';
 	import SvelteTable from 'svelte-table';
+	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
-	import { Button, Color, IconMore, TextInput, TextInputType } from "@iroco/ui";
+	import { Button, Color, IconMore, TextInput, TextInputType } from '@iroco/ui';
 	import Modal from '$lib/Modal.svelte';
 	import Select from 'svelte-select';
 	import { Role } from '../../../domain';
+	import { invalidate } from '$app/navigation';
 
 	export let data: PageData;
-	const rows = data.users;
 	let showModal = false;
-	let email = '';
-	let firstName = '';
-	let lastName = '';
-	let password = '';
-	let role: number = Role['User'];
 	let password_code = data.uuid;
+	let role: string = 'User';
+	let closeModal: () => void;
 
-	let roleItems = Object.keys(Role)
-		.filter((v) => isNaN(Number(v)) && !v.startsWith('Super'))
-		.map((label: string) => ({ label, value: Role[label] }));
+	let roles = Object.keys(Role).filter((v) => isNaN(Number(v)) && !v.startsWith('Super'));
 	const columns = [
 		{
 			key: 'email',
@@ -30,7 +26,7 @@
 		{
 			key: 'role',
 			title: 'role',
-			value: (v) => v.role,
+			value: (v) => Role[v.role],
 			sortable: true
 		},
 		{
@@ -41,18 +37,23 @@
 			sortable: true
 		},
 		{
-			key: 'lastname',
-			title: 'lastname',
-			value: (v) => v.lastname,
-			sortable: true
-		},
-		{
 			key: 'firstname',
 			title: 'firstname',
 			value: (v) => v.firstname,
 			sortable: true
+		},
+		{
+			key: 'lastname',
+			title: 'lastname',
+			value: (v) => v.lastname,
+			sortable: true
 		}
 	];
+	async function saveUser() {
+		closeModal();
+		await invalidate('user:create');
+		return true;
+	}
 </script>
 
 <section class="account__users">
@@ -64,83 +65,95 @@
 		classNameTable="account__users__table"
 		classNameThead="table-primary"
 		classNameCell={['account__users__table__cell']}
+		rows={data.users}
 		{columns}
-		{rows}
 	/>
 
-	<Modal bind:showModal>
+	<Modal bind:showModal bind:closeModal>
 		<h2 slot="header">
 			{$_('account.users.modal.title')}
 		</h2>
 
-		<TextInput
-			label={$_('account.users.modal.input_email')}
-			bind:value={email}
-			id="user_email"
-			placeholder={$_('account.users.modal.input_email')}
-			name="user_email"
-			type="email"
-		/>
-		<TextInput
-			label={$_('account.users.modal.input_password')}
-			bind:value={password}
-			id="user_password"
-			placeholder={$_('account.users.modal.input_password')}
-			name="user_password"
-			type="password"
-		/>
-		<div class="iroco-ui-input">
-			<label class="iroco-ui-label" for="select_role">{$_('account.users.modal.input_role')}</label>
-			<Select
-				items={roleItems}
-				bind:role
-				value="User"
-				id="user_role"
-				name="user_role"
-				placeholder={$_('account.users.modal.select_placeholder')}
-				class="account__users__roles"
-				--item-hover-bg={Color.mediumGrey}
-				--item-is-active-bg={Color.blue}
-				--list-background={Color.darkBlue}
+		<form method="POST" class="iroco-ui-form" autocomplete="off" use:enhance>
+			<TextInput
+				label={$_('account.users.modal.input_email')}
+				id="user_email"
+				placeholder={$_('account.users.modal.input_email')}
+				name="user_email"
+				type="email"
+				autocomplete="new-password"
 			/>
-		</div>
-		<TextInput
-			label={$_('account.users.modal.input_password_code')}
-			bind:value={password_code}
-			id="user_password_code"
-			placeholder={$_('account.users.modal.input_password_code')}
-			name="user_password_code"
-			type="text"
-		/>
-		<TextInput
-			label={$_('account.users.modal.input_first_name')}
-			bind:value={firstName}
-			id="user_first_name"
-			placeholder={$_('account.users.modal.input_first_name')}
-			name="user_first_name"
-			type={TextInputType.text} />
-		<TextInput
-			label={$_('account.users.modal.input_last_name')}
-			bind:value={lastName}
-			id="user_last_name"
-			placeholder={$_('account.users.modal.input_last_name')}
-			name="user_last_name"
-			type={TextInputType.text}
-		/>
+			<TextInput
+				label={$_('account.users.modal.input_password')}
+				id="user_password"
+				placeholder={$_('account.users.modal.input_password')}
+				name="user_password"
+				type="password"
+				autocomplete="new-password"
+			/>
+			<div class="iroco-ui-input">
+				<label class="iroco-ui-label" for="select_role"
+					>{$_('account.users.modal.input_role')}</label
+				>
+				<Select
+					items={roles}
+					id="user_role"
+					bind:role
+					value="User"
+					placeholder={$_('account.users.modal.select_placeholder')}
+					class="account__users__roles"
+					--item-hover-bg={Color.mediumGrey}
+					--item-is-active-bg={Color.blue}
+					--list-background={Color.darkBlue}
+				/>
+				<input type="hidden" name="user_role" value={role} />
+			</div>
+			<TextInput
+				label={$_('account.users.modal.input_password_code')}
+				id="user_password_code"
+				bind:value={password_code}
+				placeholder={$_('account.users.modal.input_password_code')}
+				name="user_password_code"
+				type="text"
+			/>
+			<TextInput
+				label={$_('account.users.modal.input_first_name')}
+				id="user_first_name"
+				placeholder={$_('account.users.modal.input_first_name')}
+				name="user_first_name"
+				type={TextInputType.text}
+			/>
+			<TextInput
+				label={$_('account.users.modal.input_last_name')}
+				id="user_last_name"
+				placeholder={$_('account.users.modal.input_last_name')}
+				name="user_last_name"
+				type={TextInputType.text}
+			/>
+			<hr />
+			<div class="button-group">
+				<Button type="submit" size="small" kind="success" on:click={saveUser}>
+					{$_('account.users.modal.btn_save')}
+				</Button>
+				<Button size="small" kind="danger" on:click={closeModal}
+					>{$_('account.users.modal.btn_cancel')}</Button
+				>
+			</div>
+		</form>
 	</Modal>
 </section>
 
 <style lang="scss">
 	@use 'node_modules/@iroco/ui/dist/scss/colors';
-
 	:global(.account__users__roles) {
 		background: colors.$darkBlue !important;
 	}
-
 	:global(.account__users__table) {
 		border-collapse: collapse;
+		max-width: 90%;
 	}
 	:global(.account__users__table td, th) {
 		border: 1px solid colors.$darkGrey;
+		padding: 0 1em 0 1em;
 	}
 </style>

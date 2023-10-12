@@ -50,11 +50,7 @@ export class Repository {
 			.first();
 	}
 	async getDomainById(domain_id: number): Promise<VirtualDomain | undefined> {
-		return this.db
-			.select('*')
-			.from<VirtualDomain>('virtual_domain')
-			.where('id', domain_id)
-			.first();
+		return this.db.select('*').from<VirtualDomain>('virtual_domain').where('id', domain_id).first();
 	}
 
 	async getAvailableDomains(): Promise<Array<VirtualDomain>> {

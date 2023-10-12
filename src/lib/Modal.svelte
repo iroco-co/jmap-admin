@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
-	import { Button } from '@iroco/ui';
-
 	export let showModal = false;
+	export const closeModal = () => dialog.close();
 
 	let dialog: HTMLDialogElement;
 
@@ -20,15 +18,6 @@
 		<slot name="header" />
 		<hr />
 		<slot />
-		<hr />
-		<div class="button-group">
-			<Button size="small" kind="success" on:click={() => dialog.close()}
-				>{$_('account.users.modal.btn_save')}</Button
-			>
-			<Button size="small" kind="danger" on:click={() => dialog.close()}
-				>{$_('account.users.modal.btn_cancel')}</Button
-			>
-		</div>
 	</div>
 </dialog>
 
