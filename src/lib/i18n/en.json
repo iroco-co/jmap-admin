@@ -1,4 +1,17 @@
 {
+	"common": {
+		"field_required": "This field is required",
+		"an_error_has_occured": "An error has occured",
+		"cancel": "Cancel",
+		"sizeStr": "B KB MB GB TB PB"
+	},
+	"err": {
+		"invalid_credentials": "Invalid credentials",
+		"invalid_code": "Invalid password reset code. Please check the last reset code we sent you.",
+		"field_missing": "Some mandatory fields are empty",
+		"jmap_error": "JMAP server error",
+		"no_jwt": "No JSON Web Token"
+	},
 	"login": {
 		"email": "Email address",
 		"password": "Password",
@@ -59,6 +72,25 @@
 	},
 	"account": {
 		"title": "Dashboard",
+		"home": {
+			"title": "Welcome",
+			"your_subscription": "Subscription: ",
+			"your_email": "Your email: ",
+			"quota": "Your usage: ",
+			"role": {
+				"0": "Your account is not activated yet. To activate your account, go to your inbox and click the activation link that was sent to you.",
+				"1": "Your account is in free trial period",
+				"2": "Your account is fully configured",
+				"3": "You are administrator",
+				"4": "You are super-administrator"
+			},
+			"unsubscribe": "You can close your iroco account by clicking on <a href=\"/app/account/unsubscribe\">this link</a>.",
+			"daysleft": "You have {daysLeft} trial days left.",
+			"activate": {
+				"title": "Warning: your account is not yet activated",
+				"text": "In order for your email account to work properly, you must: <ol><li><a href=\"/app/account/help#mail_thunderbird_step_by_step\">Configure</a> your email client</li><li>In your inbox, click on the activation link that was sent to you by email</li></ol>"
+			}
+		},
 		"dns": {
 			"title": "DNS Zone configuration"
 		},

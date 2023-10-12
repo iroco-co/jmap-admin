@@ -1,4 +1,17 @@
 {
+	"common": {
+		"field_required": "Ce champ est requis",
+		"an_error_has_occured": "Une erreur est survenue",
+		"cancel": "Annuler",
+		"sizeStr": "octets Ko Mo Go To Po"
+	},
+	"err": {
+		"invalid_credentials": "Utilisateur ou de mot de passe invalide",
+		"invalid_code": "Code de réinitialisation de mot de passe invalide. Vérifiez le code envoyé lors de votre inscription ou dernier changement de mot de passe.",
+		"field_missing": "Des champs indispensables ne sont pas renseignés.",
+		"jmap_error": "Erreur du serveur JMAP",
+		"no_jwt": "Aucun JSON token trouvé dans les cookies"
+	},
 	"login": {
 		"email": "Adresse email",
 		"password": "Mot de passe",
@@ -59,6 +72,25 @@
 	},
 	"account": {
 		"title": "Tableau de bord",
+		"home": {
+			"title": "Bienvenue",
+			"your_subscription": "Forfait : ",
+			"your_email": "Votre email : ",
+			"role": {
+				"0": "Votre compte n'est pas encore activé. Pour l'activer, rendez-vous dans votre boîte de réception et cliquez sur le lien d'activation qui vous a été envoyé.",
+				"1": "Votre compte est en période d'essai gratuite",
+				"2": "Votre compte est correctement configuré",
+				"3": "Vous êtes administrateur",
+				"4": "Vous êtes super-administrateur"
+			},
+			"quota": "Votre utilisation : ",
+			"unsubscribe": "Vous pouvez fermer votre compte iroco en cliquant sur <a href=\"/app/account/unsubscribe\">ce lien</a>.",
+			"daysleft": "Il vous reste {daysLeft} jours d'essai.",
+			"activate": {
+				"title": "Attention : votre compte n'est pas encore activé",
+				"text": "Pour pouvoir utiliser votre boîte mail, vous devez : <ol><li><a href=\"/app/account/help#mail_thunderbird_step_by_step\">Configurer</a> votre client mail</li><li>Dans votre boîte de réception, cliquer sur le lien d'activation qui vous a été envoyé par mail</li></ol>"
+			}
+		},
 		"dns": {
 			"title": "Configuration de la zone DNS"
 		},
