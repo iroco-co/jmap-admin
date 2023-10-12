@@ -20,7 +20,7 @@ afterEach(async () => {
 
 afterAll(async () => {
 	await repository.db('virtual_domain').del().where('name', 'bar.com');
-})
+});
 
 test('create user', async () => {
 	const response = await request(actions.default, {
