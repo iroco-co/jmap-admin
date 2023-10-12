@@ -42,6 +42,7 @@ jobs:
           command: |
             PGPASSWORD=iroco psql -U iroco -h postgresql test < bootstrap_db.sql
             npm run db:test
+            PGPASSWORD=iroco psql -U iroco -h postgresql test -c "SELECT setval('virtual_domain_id_seq', (SELECT MAX(id) from virtual_domain));"
 
       - run:
           name: run unit test
