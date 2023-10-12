@@ -2,7 +2,7 @@
 	import { _, time, date } from 'svelte-i18n';
 	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
-	import { Button, Color, IconMore, TextInput } from '@iroco/ui';
+	import { Button, Color, IconMore, TextInput, TextInputType } from "@iroco/ui";
 	import Modal from '$lib/Modal.svelte';
 	import Select from 'svelte-select';
 	import { Role } from '../../../domain';
@@ -19,7 +19,7 @@
 
 	let roleItems = Object.keys(Role)
 		.filter((v) => isNaN(Number(v)) && !v.startsWith('Super'))
-		.map((label) => ({ label, value: Role[label] }));
+		.map((label: string) => ({ label, value: Role[label] }));
 	const columns = [
 		{
 			key: 'email',
@@ -96,6 +96,7 @@
 				bind:role
 				value="User"
 				id="user_role"
+				name="user_role"
 				placeholder={$_('account.users.modal.select_placeholder')}
 				class="account__users__roles"
 				--item-hover-bg={Color.mediumGrey}
@@ -117,15 +118,14 @@
 			id="user_first_name"
 			placeholder={$_('account.users.modal.input_first_name')}
 			name="user_first_name"
-			type="text"
-		/>
+			type={TextInputType.text} />
 		<TextInput
 			label={$_('account.users.modal.input_last_name')}
 			bind:value={lastName}
 			id="user_last_name"
 			placeholder={$_('account.users.modal.input_last_name')}
 			name="user_last_name"
-			type="text"
+			type={TextInputType.text}
 		/>
 	</Modal>
 </section>

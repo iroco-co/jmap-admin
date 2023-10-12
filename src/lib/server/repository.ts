@@ -1,17 +1,18 @@
 import type { Knex } from 'knex';
 import type {
 	Alias,
+	BareUserEvent,
+	EventType,
 	FullUser,
 	Mandate,
 	Subscription,
 	User,
 	UserEvent,
-	VirtualDomain,
-	BareUserEvent
+	VirtualDomain
 } from '../../domain';
 import { Role } from '../../domain';
-import type { EventType } from '../../domain';
 import { DateTime } from 'luxon';
+import Transaction = Knex.Transaction;
 
 export class Repository {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,6 +47,13 @@ export class Repository {
 			.select('*')
 			.from<VirtualDomain>('virtual_domain')
 			.where('name', domain_str)
+			.first();
+	}
+	async getDomainById(domain_id: number): Promise<VirtualDomain | undefined> {
+		return this.db
+			.select('*')
+			.from<VirtualDomain>('virtual_domain')
+			.where('id', domain_id)
 			.first();
 	}
 
@@ -143,11 +151,7 @@ export class Repository {
 
 	async saveUserAndDomain(user: FullUser, domain: VirtualDomain) {
 		return this.db.transaction(async (trx) => {
-			const results = await this.db('virtual_domain')
-				.insert<VirtualDomain>(domain)
-				.transacting(trx)
-				.returning('id');
-			user.vdomain_id = results[0].id;
+			user.vdomain_id = await this.saveDomain(domain, trx);
 			await this.db('user').insert<FullUser>(user).transacting(trx);
 		});
 	}
@@ -158,5 +162,15 @@ export class Repository {
 			.from<User>('user')
 			.join('virtual_domain', 'user.vdomain_id', 'virtual_domain.id')
 			.where('virtual_domain.name', emailDomain);
+	}
+
+	async saveDomain(domain: VirtualDomain, transaction: Transaction | null = null): Promise<number> {
+		const local_db = this.db('virtual_domain');
+		if (transaction !== null) {
+			local_db.transacting(transaction);
+		}
+		const results = await local_db.insert<VirtualDomain>(domain).returning('id');
+
+		return results[0].id;
 	}
 }
