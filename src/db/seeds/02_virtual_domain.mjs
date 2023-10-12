@@ -23,4 +23,5 @@ export const seed = async (knex) => {
 			available: true
 		}
 	]);
+	await knex.raw("SELECT setval('virtual_domain_id_seq', (SELECT MAX(id) from virtual_domain))");
 };
