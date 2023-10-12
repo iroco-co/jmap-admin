@@ -4,7 +4,7 @@ import { repository } from '../../src/lib/server/db';
 import { actions } from '../../src/routes/account/users/+page.server';
 import { Role } from '../../src/domain';
 
-beforeEach(async () => {
+beforeAll(async () => {
 	await repository.saveDomain({
 		name: 'bar.com',
 		dkim_selector: 'dkim',
@@ -16,8 +16,11 @@ beforeEach(async () => {
 
 afterEach(async () => {
 	await repository.db('user').del();
-	await repository.db('virtual_domain').del().where('name', 'bar.com');
 });
+
+afterAll(async () => {
+	await repository.db('virtual_domain').del().where('name', 'bar.com');
+})
 
 test('create user', async () => {
 	const response = await request(actions.default, {
