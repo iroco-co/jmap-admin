@@ -13,6 +13,8 @@ jobs:
 
     steps:
       - checkout
+      - attach_workspace:
+            at: /tmp/jmap-admin
       - run:
           name: Update NPM
           command: 'sudo npm install -g npm@8'
@@ -50,3 +52,53 @@ jobs:
       - run:
           name: run integration tests
           command: npm run test:integration
+
+      - persist_to_workspace:
+          root: /tmp/jmap-admin
+          paths:
+            - .
+# Marc Bouvier
+  # m.bouvier.dev@gmail.com
+  # marc-bouvier
+# https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
+  release:
+    docker:
+      - image: docker:20.10.22-git
+    steps:
+      - attach_workspace:
+          at: /tmp/jmap-admin
+      - setup_remote_docker
+      - run:
+          name: Login to Docker hub
+          command: |
+            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+      - run:
+          name: Install tonistiigi/binfmt support for additional platforms
+          command: |
+            docker run --privileged --rm tonistiigi/binfmt --install all
+      - run:
+          name: Build and push the image for several platform
+          command: |
+            cd /tmp/jmap-admin
+            docker buildx create --use
+            docker buildx build -f docker/Dockerfile \
+              --platform linux/amd64,linux/arm64 \
+              -t iroco/jmapadmin:${CIRCLE_TAG} \
+              --push .
+
+workflows:
+  version: 2
+  build_workflow:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - release:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^[0-9.]*/
+            branches:
+              ignore: /.*/
