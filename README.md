@@ -17,3 +17,38 @@ Administration interface base on JMAP for cyrus written in svelte for:
 The architecture is based on SvelteKit back and front with typescript, postgresql as backend database.
 
 It is a work in progress.
+
+## Develop
+
+Installing dépendencies
+
+```shell
+npm ci
+```
+
+Create database
+
+```shell
+psql -h postgresql -U postgres < bootstrap_db.sql
+npm run db:dev
+npm run db:test
+```
+
+Run tests
+
+```shell
+npm run test
+```
+
+Run dev server
+
+```shell
+npm run dev
+```
+
+Releasing: the docker is built and pushed by the CI. We use release-it for creating a TAG.
+We use the [semantic versioning](https://semver.org/).
+
+```shell
+npm run release
+```
