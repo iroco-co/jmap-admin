@@ -1,6 +1,6 @@
 {
-	"name": "iroco-admin",
-	"version": "0.1.0",
+	"name": "jmap-admin",
+	"version": "0.1.3",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -16,7 +16,8 @@
 		"clean": "rm -rf .svelte-kit build && npm cache clean --force",
 		"db:dev": "NODE_ENV=dev knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=dev knex --knexfile src/db/knexfile.mjs seed:run",
 		"db:preprod": "NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs seed:run",
-		"db:test": "NODE_ENV=test knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=test knex --knexfile src/db/knexfile.mjs seed:run"
+		"db:test": "NODE_ENV=test knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=test knex --knexfile src/db/knexfile.mjs seed:run",
+		"release": "release-it"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "^1.3.1",
@@ -43,6 +44,7 @@
 		"msw": "^1.2.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
+		"release-it": "^16.2.1",
 		"sass": "^1.56.1",
 		"smtp-server": "^3.11.0",
 		"sqlite3": "^5.1.4",
