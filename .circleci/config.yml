@@ -11,7 +11,7 @@ jobs:
           POSTGRES_PASSWORD: iroco
           POSTGRES_DB: test
 
-    working_directory: /tmp
+    working_directory: /tmp/jmap-admin
     steps:
       - checkout
       - run:
@@ -52,19 +52,13 @@ jobs:
           name: run integration tests
           command: npm run test:integration
 
-      - persist_to_workspace:
-          root: /tmp/jmap-admin
-          paths:
-            - .
-
   # https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
   release:
     docker:
       - image: docker:20.10.22-git
-    working_directory: /tmp
+    working_directory: /tmp/jmap-admin
     steps:
-      - attach_workspace:
-          at: /tmp/jmap-admin
+      - checkout
       - setup_remote_docker
       - run:
           name: Login to Docker hub
