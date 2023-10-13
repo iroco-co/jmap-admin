@@ -17,7 +17,7 @@
     "db:dev": "NODE_ENV=dev knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=dev knex --knexfile src/db/knexfile.mjs seed:run",
     "db:preprod": "NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs seed:run",
     "db:test": "NODE_ENV=test knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=test knex --knexfile src/db/knexfile.mjs seed:run",
-    "release": "release-it"
+    "release": "release-it --only-version"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "^1.3.1",
