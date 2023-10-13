@@ -69,13 +69,13 @@ jobs:
           command: |
             docker run --privileged --rm tonistiigi/binfmt --install all
       - run:
-          name: Build and push the image for several platform
+          name: Build and push the image for linux/amd64
           command: |
             cd /tmp/jmap-admin
             ls -l .
             docker buildx create --use
             docker buildx build -f docker/Dockerfile \
-              --platform linux/amd64,linux/arm64 \
+              --platform linux/amd64 \
               -t iroco/jmapadmin:${CIRCLE_TAG} \
               --push .
 
