@@ -11,10 +11,9 @@ jobs:
           POSTGRES_PASSWORD: iroco
           POSTGRES_DB: test
 
+    working_directory: /tmp
     steps:
       - checkout
-      - attach_workspace:
-          at: /tmp/jmap-admin
       - run:
           name: Update NPM
           command: 'sudo npm install -g npm@8'
@@ -57,13 +56,12 @@ jobs:
           root: /tmp/jmap-admin
           paths:
             - .
-  # Marc Bouvier
-  # m.bouvier.dev@gmail.com
-  # marc-bouvier
+
   # https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
   release:
     docker:
       - image: docker:20.10.22-git
+    working_directory: /tmp
     steps:
       - attach_workspace:
           at: /tmp/jmap-admin
@@ -80,6 +78,7 @@ jobs:
           name: Build and push the image for several platform
           command: |
             cd /tmp/jmap-admin
+            ls -l .
             docker buildx create --use
             docker buildx build -f docker/Dockerfile \
               --platform linux/amd64,linux/arm64 \
