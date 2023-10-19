@@ -15,6 +15,7 @@ beforeAll(async () => {
 });
 
 afterEach(async () => {
+	await repository.db('virtual_alias').del();
 	await repository.db('user').del();
 });
 
@@ -48,4 +49,30 @@ test('create user', async () => {
 	expect(actual_user.lastname).toEqual('Bar');
 	expect(actual_user.password).toBeDefined();
 	expect(actual_user.password_code).toBeDefined();
+});
+
+test('delete user', async () => {
+	await request(actions.default, {
+		locals: { email: 'foo@bar.com' },
+		body: createForm({
+			user_email: 'qux@bar.com',
+			user_password: 'password',
+			user_role: 'User',
+			user_password_code: 'code',
+			user_first_name: 'Qux',
+			user_last_name: 'Bar'
+		})
+	});
+	expect(await repository.getFullUser('qux@bar.com')).toBeDefined()
+	await repository.saveAlias({source: 'qux_alias1@bar.com', destination: 'qux@bar.com'})
+	await repository.saveAlias({source: 'qux_alias2@bar.com', destination: 'qux@bar.com'})
+
+	const response = await request(actions.deleteUser, {
+		locals: {email: 'foo@bar.com'},
+		body: createForm({user_email: 'qux@bar.com'})
+	})
+
+	expect(response).toEqual({ status: 0 });
+	expect(await repository.getFullUser('qux@bar.com')).toBeUndefined()
+	expect(await repository.getAliases('qux@bar.com')).toEqual([])
 });

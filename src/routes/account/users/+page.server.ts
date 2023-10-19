@@ -27,7 +27,7 @@ export const actions: Actions = {
 
 		const domain = await repository.getDomain(getEmailDomain(locals.email));
 
-		if (domain !== undefined) {
+		if (domain !== undefined && domain.name === getEmailDomain(<string>user_email)) {
 			await repository.saveUser({
 				email: <string>user_email,
 				password: hashPassword(<string>user_password),
@@ -39,6 +39,16 @@ export const actions: Actions = {
 				creation_date: new Date()
 			});
 			return { status: FormStatus.OK };
+		}
+	},
+
+	deleteUser: async ({request, locals}) => {
+		const {user_email} = Object.fromEntries(await request.formData())
+		const domain = await repository.getDomain(getEmailDomain(locals.email))
+		if (domain !== undefined && domain.name === getEmailDomain(<string>user_email)) {
+			await repository.deleteAliases(<string>user_email)
+			await repository.deleteUser(<string>user_email)
+			return { status: FormStatus.OK }
 		}
 	}
 };
