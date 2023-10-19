@@ -24,7 +24,7 @@ afterAll(async () => {
 });
 
 test('create user', async () => {
-	const response = await request(actions.default, {
+	const response = await request(actions.addUser, {
 		locals: { email: 'foo@bar.com' },
 		body: createForm({
 			user_email: 'qux@bar.com',
@@ -52,7 +52,7 @@ test('create user', async () => {
 });
 
 test('delete user', async () => {
-	await request(actions.default, {
+	await request(actions.addUser, {
 		locals: { email: 'foo@bar.com' },
 		body: createForm({
 			user_email: 'qux@bar.com',
@@ -63,16 +63,16 @@ test('delete user', async () => {
 			user_last_name: 'Bar'
 		})
 	});
-	expect(await repository.getFullUser('qux@bar.com')).toBeDefined()
-	await repository.saveAlias({source: 'qux_alias1@bar.com', destination: 'qux@bar.com'})
-	await repository.saveAlias({source: 'qux_alias2@bar.com', destination: 'qux@bar.com'})
+	expect(await repository.getFullUser('qux@bar.com')).toBeDefined();
+	await repository.saveAlias({ source: 'qux_alias1@bar.com', destination: 'qux@bar.com' });
+	await repository.saveAlias({ source: 'qux_alias2@bar.com', destination: 'qux@bar.com' });
 
 	const response = await request(actions.deleteUser, {
-		locals: {email: 'foo@bar.com'},
-		body: createForm({user_email: 'qux@bar.com'})
-	})
+		locals: { email: 'foo@bar.com' },
+		body: createForm({ user_email: 'qux@bar.com' })
+	});
 
 	expect(response).toEqual({ status: 0 });
-	expect(await repository.getFullUser('qux@bar.com')).toBeUndefined()
-	expect(await repository.getAliases('qux@bar.com')).toEqual([])
+	expect(await repository.getFullUser('qux@bar.com')).toBeUndefined();
+	expect(await repository.getAliases('qux@bar.com')).toEqual([]);
 });

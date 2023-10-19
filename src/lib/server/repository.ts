@@ -73,7 +73,7 @@ export class Repository {
 	}
 
 	async deleteAliases(destinationEmail: string) {
-		return this.db('virtual_alias').delete<Alias>().where('destination', destinationEmail)
+		return this.db('virtual_alias').delete<Alias>().where('destination', destinationEmail);
 	}
 
 	async updatePassword(email: string, newPasswordHash: string) {

@@ -8,6 +8,7 @@
 	import Select from 'svelte-select';
 	import { Role } from '../../../domain';
 	import { invalidate } from '$app/navigation';
+	import DeleteIconForm from '$lib/DeleteIconForm.svelte';
 
 	export let data: PageData;
 	let showModal = false;
@@ -47,6 +48,18 @@
 			title: 'lastname',
 			value: (v) => v.lastname,
 			sortable: true
+		},
+		{
+			key: 'delete',
+			title: '',
+			sortable: false,
+			renderComponent: {
+				component: DeleteIconForm,
+				props: {
+					action: 'deleteUser',
+					name: 'user_email'
+				}
+			}
 		}
 	];
 	async function saveUser() {
@@ -74,7 +87,7 @@
 			{$_('account.users.modal.title')}
 		</h2>
 
-		<form method="POST" class="iroco-ui-form" autocomplete="off" use:enhance>
+		<form method="POST" class="iroco-ui-form" autocomplete="off" action="?/addUser" use:enhance>
 			<TextInput
 				label={$_('account.users.modal.input_email')}
 				id="user_email"

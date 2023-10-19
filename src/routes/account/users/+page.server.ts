@@ -15,7 +15,7 @@ export const load: ServerLoad = async (event) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals }: import('./$types').RequestEvent) => {
+	addUser: async ({ request, locals }) => {
 		const {
 			user_email,
 			user_password,
@@ -42,13 +42,13 @@ export const actions: Actions = {
 		}
 	},
 
-	deleteUser: async ({request, locals}) => {
-		const {user_email} = Object.fromEntries(await request.formData())
-		const domain = await repository.getDomain(getEmailDomain(locals.email))
+	deleteUser: async ({ request, locals }) => {
+		const { user_email } = Object.fromEntries(await request.formData());
+		const domain = await repository.getDomain(getEmailDomain(locals.email));
 		if (domain !== undefined && domain.name === getEmailDomain(<string>user_email)) {
-			await repository.deleteAliases(<string>user_email)
-			await repository.deleteUser(<string>user_email)
-			return { status: FormStatus.OK }
+			await repository.deleteAliases(<string>user_email);
+			await repository.deleteUser(<string>user_email);
+			return { status: FormStatus.OK };
 		}
 	}
 };
