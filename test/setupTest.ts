@@ -17,20 +17,6 @@ vi.mock('$app/environment', (): typeof environment => ({
 	version: 'any'
 }));
 
-vi.mock('$env/dynamic/private', () => {
-	return {
-		env: {
-			PG_CONNECTION_URL: 'postgresql://iroco:iroco@postgresql:5432/test',
-			PG_DRIVER: 'pg',
-			MAILER_HOST: 'localhost',
-			MAILER_PORT: 2525,
-			GC_ACCESS_TOKEN: 'GC_ACCESS_TOKEN',
-			GC_ENVIRONMENT: 'SANDBOX',
-			JWT_SECRET: 'jwt_secret'
-		}
-	};
-});
-
 // Mock SvelteKit runtime module $app/navigation
 vi.mock('$app/navigation', (): typeof navigation => ({
 	afterNavigate: () => {},

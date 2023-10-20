@@ -5,7 +5,6 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"smtp": "node test/smtpServer.js",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:watch": "vitest test/route test/lib",
@@ -14,9 +13,6 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"clean": "rm -rf .svelte-kit build && npm cache clean --force",
-		"db:dev": "NODE_ENV=dev knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=dev knex --knexfile src/db/knexfile.mjs seed:run",
-		"db:preprod": "NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=preprod knex --knexfile src/db/knexfile.mjs seed:run",
-		"db:test": "NODE_ENV=test knex --knexfile src/db/knexfile.mjs migrate:latest && NODE_ENV=test knex --knexfile src/db/knexfile.mjs seed:run",
 		"release": "npm run format && release-it --only-version"
 	},
 	"devDependencies": {
@@ -46,7 +42,6 @@
 		"prettier-plugin-svelte": "^2.10.1",
 		"release-it": "^16.2.1",
 		"sass": "^1.56.1",
-		"smtp-server": "^3.11.0",
 		"sqlite3": "^5.1.4",
 		"svelte": "^4.2.1",
 		"svelte-check": "^3.5.2",
@@ -61,18 +56,11 @@
 	"dependencies": {
 		"@iroco/ui": "^0.61.0",
 		"jose": "^4.15.2",
-		"knex": "^2.3.0",
 		"luxon": "^3.4.3",
-		"nodemailer": "^6.8.0",
-		"pg": "^8.8.0",
-		"pg-native": "^3.0.1",
 		"pino": "^8.8.0",
 		"pino-pretty": "^9.1.1",
-		"sha512-crypt-ts": "^0.1.27",
 		"svelte-awesome": "^3.0.1",
-		"svelte-i18n": "<3.7.3",
-		"svelte-select": "^5.7.0",
-		"svelte-table": "^0.6.1"
+		"svelte-i18n": "<3.7.3"
 	},
 	"lint-staged": {
 		"*.{js,ts,svelte}": [
