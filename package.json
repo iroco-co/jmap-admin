@@ -60,7 +60,8 @@
 		"pino": "^8.8.0",
 		"pino-pretty": "^9.1.1",
 		"svelte-awesome": "^3.0.1",
-		"svelte-i18n": "<3.7.3"
+		"svelte-i18n": "<3.7.3",
+		"svelte-speedometer": "^1.1.0"
 	},
 	"lint-staged": {
 		"*.{js,ts,svelte}": [

@@ -3,11 +3,13 @@
 	import { _, number } from 'svelte-i18n';
 	import { envelope } from 'svelte-awesome/icons';
 	import { Color } from '@iroco/ui';
+	import Speedometer from 'svelte-speedometer';
 
 	import type { PageData } from './$types';
 	import Icon from 'svelte-awesome';
 	import { Role, FormStatus } from '../../domain';
 	import { humanSize } from '$lib/strings';
+	import { browser } from '$app/environment';
 
 	function getRoleColor(role: Role) {
 		if (role == Role.Temporary) return Color.red;
@@ -43,6 +45,24 @@
 				({$number(data.quota.used / data.quota.total, { style: 'percent' })})</span
 			>
 		</div>
+		{#if browser}
+			<Speedometer
+				height={180}
+				maxValue={100}
+				value={100 * Math.min(data.quota.used / data.quota.total, 1.0)}
+				currentValueText={$_('account.volume.title', {
+					values: {
+						userVolumeStorage: $number(Math.min(data.quota.used / data.quota.total, 1.0), {
+							style: 'percent'
+						})
+					}
+				})}
+				needleColor="#f2ebe3"
+				segments={3}
+				customSegmentStops={[0, 75, 90, 100]}
+				segmentColors={[Color.green, Color.yellow, Color.red]}
+			/>
+		{/if}
 	{/if}
 	<p>
 		{@html $_('account.home.unsubscribe')}
