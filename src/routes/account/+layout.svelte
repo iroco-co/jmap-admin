@@ -18,16 +18,6 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/aliases',
-			name: $_('sidebar.aliases'),
-			type: NavigationItemType.ANCHOR
-		},
-		{
-			hrefOrCallback: '/account/dns',
-			name: $_('sidebar.dns'),
-			type: NavigationItemType.ANCHOR
-		},
-		{
 			hrefOrCallback: '/account/addressbooks',
 			name: $_('sidebar.addressbooks'),
 			type: NavigationItemType.ANCHOR
@@ -40,11 +30,6 @@
 		{
 			hrefOrCallback: '/account/folders',
 			name: $_('sidebar.folders'),
-			type: NavigationItemType.ANCHOR
-		},
-		{
-			hrefOrCallback: '/account/payment',
-			name: $_('sidebar.payment'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
