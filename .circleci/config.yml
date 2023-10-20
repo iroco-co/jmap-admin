@@ -4,12 +4,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:18.12.1
-      - image: circleci/postgres:9.5
-        name: postgresql
-        environment:
-          POSTGRES_USER: iroco
-          POSTGRES_PASSWORD: iroco
-          POSTGRES_DB: test
 
     working_directory: /tmp/jmap-admin
     steps:
@@ -37,12 +31,6 @@ jobs:
       - run:
           name: build
           command: npm run build
-
-      - run:
-          name: make test db
-          command: |
-            PGPASSWORD=iroco psql -U iroco -h postgresql test < bootstrap_db.sql
-            npm run db:test
 
       - run:
           name: run unit test
