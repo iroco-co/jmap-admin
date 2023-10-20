@@ -29,19 +29,3 @@ export function checkPassword(password: string | null): string | null {
 	}
 }
 
-export function checkUsername(_username: string | null): string | null {
-	if (_username === '') {
-		return 'signup.errors.empty_username';
-	} else if (_username != null && !usernameRegexp.test(_username)) {
-		return 'signup.errors.invalid_username';
-	} else {
-		return null;
-	}
-}
-
-export function checkDomainName(domainName: string | null) {
-	if (domainName != null && !domainRegexp.test(domainName)) {
-		return 'signup.errors.invalid_domain_name';
-	}
-	return null;
-}

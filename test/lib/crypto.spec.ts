@@ -30,17 +30,3 @@ test('is JWT from signup', async () => {
 	const actualJwt = await jwtVerify(jwt, secret, { issuer: 'urn:iroco:issuer' });
 	expect(isSignupJwt(<JwtPayload>actualJwt.payload)).toBeTruthy();
 });
-
-test('remove PEM marks', () => {
-	expect(
-		removePemMarks('-----BEGIN PUBLIC KEY-----\nfoo\n-----BEGIN ENCRYPTED PRIVATE KEY-----')
-	).toEqual('foo');
-});
-
-test('generate DKIM keypair', async () => {
-	const keypair = await generateOpendkim();
-	expect(keypair.publicKey).toBeDefined();
-	expect(keypair.privateKey).toBeDefined();
-	expect(keypair.publicKey.startsWith('-----BEGIN RSA PUBLIC KEY-----')).toBeTruthy();
-	expect(keypair.privateKey.startsWith('-----BEGIN RSA PRIVATE KEY-----')).toBeTruthy();
-});

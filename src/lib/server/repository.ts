@@ -17,6 +17,7 @@ import Transaction = Knex.Transaction;
 export class Repository {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	db: Knex<any, unknown[]>;
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor(dataSource: Knex<any, unknown[]>) {
 		this.db = dataSource;
@@ -36,25 +37,6 @@ export class Repository {
 
 	async getFullUser(email: string): Promise<FullUser | undefined> {
 		return this.db.select('*').from<FullUser>('user').where('email', email).first();
-	}
-
-	async getAliases(email: string): Promise<Array<Alias>> {
-		return this.db.select('*').from<Alias>('virtual_alias').where('destination', email);
-	}
-
-	async getDomain(domain_str: string): Promise<VirtualDomain | undefined> {
-		return this.db
-			.select('*')
-			.from<VirtualDomain>('virtual_domain')
-			.where('name', domain_str)
-			.first();
-	}
-	async getDomainById(domain_id: number): Promise<VirtualDomain | undefined> {
-		return this.db.select('*').from<VirtualDomain>('virtual_domain').where('id', domain_id).first();
-	}
-
-	async getAvailableDomains(): Promise<Array<VirtualDomain>> {
-		return this.db.select('*').from<VirtualDomain>('virtual_domain').where('available', true);
 	}
 
 	async getUserByEmailLike(likeExpr: string): Promise<Array<User>> {
@@ -134,8 +116,8 @@ export class Repository {
 	): Promise<Array<Pick<User, 'email'>>> {
 		return this.db('user')
 			.select('email')
-			.where('creation_date', '<=', DateTime.now().minus({ days: delayDays }).toISO())
-			.where('creation_date', '>', DateTime.now().minus({ days: butNotMoreThan }).toISO())
+			.where('creation_date', '<=', DateTime.now().minus({days: delayDays}).toISO())
+			.where('creation_date', '>', DateTime.now().minus({days: butNotMoreThan}).toISO())
 			.where(function () {
 				this.where('role', Role.Temporary).orWhere('role', Role.Trial);
 			});
@@ -147,30 +129,5 @@ export class Repository {
 
 	async getEvent(type: EventType, email: string): Promise<UserEvent | undefined> {
 		return this.db('event').select().where('type', type).where('user_id', email).first();
-	}
-
-	async saveUserAndDomain(user: FullUser, domain: VirtualDomain) {
-		return this.db.transaction(async (trx) => {
-			user.vdomain_id = await this.saveDomain(domain, trx);
-			await this.db('user').insert<FullUser>(user).transacting(trx);
-		});
-	}
-
-	async getUsers(emailDomain: string) {
-		return this.db
-			.select('*')
-			.from<User>('user')
-			.join('virtual_domain', 'user.vdomain_id', 'virtual_domain.id')
-			.where('virtual_domain.name', emailDomain);
-	}
-
-	async saveDomain(domain: VirtualDomain, transaction: Transaction | null = null): Promise<number> {
-		const local_db = this.db('virtual_domain');
-		if (transaction !== null) {
-			local_db.transacting(transaction);
-		}
-		const results = await local_db.insert<VirtualDomain>(domain).returning('id');
-
-		return results[0].id;
 	}
 }

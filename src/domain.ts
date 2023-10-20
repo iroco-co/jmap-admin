@@ -111,8 +111,3 @@ export enum EventType {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GenericObject = { [key: string]: any };
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
-
-export type KeyPair = {
-	publicKey: string;
-	privateKey: string;
-};

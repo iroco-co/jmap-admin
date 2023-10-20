@@ -90,24 +90,6 @@
 				"title": "Attention : votre compte n'est pas encore activé",
 				"text": "Pour pouvoir utiliser votre boîte mail, vous devez : <ol><li><a href=\"/app/account/help#mail_thunderbird_step_by_step\">Configurer</a> votre client mail</li><li>Dans votre boîte de réception, cliquer sur le lien d'activation qui vous a été envoyé par mail</li></ol>"
 			}
-		},
-		"dns": {
-			"title": "Configuration de la zone DNS"
-		},
-		"users": {
-			"title": "Utilisateurs",
-			"modal": {
-				"title": "Création d'un utilisateur",
-				"btn_save": "Enregistrer",
-				"btn_cancel": "Annuler",
-				"input_email": "Email",
-				"select_placeholder": "Sélectionnez",
-				"input_role": "Role",
-				"input_first_name": "Prénom",
-				"input_last_name": "Nom",
-				"input_password": "Mot de passe",
-				"input_password_code": "Code de récupération de mot de passe"
-			}
 		}
 	}
 }
