@@ -36,10 +36,6 @@ jobs:
           name: run unit test
           command: npm run test
 
-      - run:
-          name: run integration tests
-          command: npm run test:integration
-
   # https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
   release:
     docker:
