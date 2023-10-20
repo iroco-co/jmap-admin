@@ -7,9 +7,20 @@ export const load: PageServerLoad = async (event) => {
 	if (jwt) {
 		try {
 			const jmapResponse = await getQuota(event.locals.email, jwt);
-			return { jmapStatus: FormStatus.OK, quota: jmapResponse.list[0] };
+			return {
+				email: event.locals.email,
+				role: event.locals.role,
+				jmapStatus: FormStatus.OK,
+				quota: jmapResponse.list[0]
+			};
 		} catch (e) {
-			return { jmapStatus: FormStatus.Error, key: 'err.jmap_error', message: e.message };
+			return {
+				email: event.locals.email,
+				role: event.locals.role,
+				jmapStatus: FormStatus.Error,
+				key: 'err.jmap_error',
+				message: (<Error>e).message
+			};
 		}
 	} else {
 		return { jmapStatus: FormStatus.Error, key: 'err.no_jwt' };

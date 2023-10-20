@@ -34,6 +34,7 @@ export const handle: Handle = async function ({ event, resolve }) {
 		locale.set(lang);
 		event.locals.lang = lang;
 		event.locals.email = payload.sub;
+		event.locals.role = payload.role;
 	}
 	return resolve(event);
 };
