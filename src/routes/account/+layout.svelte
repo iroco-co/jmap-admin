@@ -13,11 +13,6 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/users',
-			name: $_('sidebar.users'),
-			type: NavigationItemType.ANCHOR
-		},
-		{
 			hrefOrCallback: '/account/addressbooks',
 			name: $_('sidebar.addressbooks'),
 			type: NavigationItemType.ANCHOR
