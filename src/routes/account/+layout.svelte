@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Navigation, NavigationItemType } from '@iroco/ui';
+	import { Navigation, NavigationItemType, Color } from '@iroco/ui';
 	import { _ } from 'svelte-i18n';
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -41,6 +41,7 @@
 	type="sidebar"
 	title={$_('account.title')}
 	version={data?.version}
+	color={Color.blue}
 />
 
 <main class="main">
