@@ -90,6 +90,11 @@
 				"title": "Attention : votre compte n'est pas encore activé",
 				"text": "Pour pouvoir utiliser votre boîte mail, vous devez : <ol><li><a href=\"/app/account/help#mail_thunderbird_step_by_step\">Configurer</a> votre client mail</li><li>Dans votre boîte de réception, cliquer sur le lien d'activation qui vous a été envoyé par mail</li></ol>"
 			}
+		},
+		"calendars": {
+			"title": "Calendriers",
+			"id": "Id",
+			"name": "Nom"
 		}
 	}
 }

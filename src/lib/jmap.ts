@@ -1,6 +1,12 @@
 import { env } from '$env/dynamic/private';
 
-export type MethodName = 'Quota/get' | 'SieveScript/get' | 'SieveScript/set' | 'Principal/get';
+export type MethodName =
+	| 'Quota/get'
+	| 'SieveScript/get'
+	| 'SieveScript/set'
+	| 'Principal/get'
+	| 'Calendar/get'
+	| 'AddressBook/get';
 
 export type MethodCall = {
 	methodName: MethodName;
@@ -51,8 +57,9 @@ export interface Principal {
 /**
  * See https://jmap.io/spec-core.html#get
  */
-export interface GetArguments<Properties extends EntityProperties> extends AccountId {
+export interface GetArguments<Properties extends EntityProperties> {
 	ids: string[] | null;
+	accountId?: string;
 	properties?: (keyof Properties)[];
 }
 
@@ -75,13 +82,6 @@ export type Quota = {
 	total: number;
 };
 
-export type QuotaResponse = {
-	state: string;
-	list: Quota[];
-	notfound: string[];
-	accountId: string;
-};
-
 export type SieveScript = {
 	id: string;
 	name: string;
@@ -89,25 +89,56 @@ export type SieveScript = {
 	blobId: string;
 };
 
-export type SieveScriptResponse = {
+export type Response<T> = {
 	state: string;
-	list: Array<SieveScript>;
-	notFound: Array<string>;
-	accountId: AccountId;
+	list: T[];
+	notfound: string[];
+	accountId: string;
 };
 
-export type PrincipalResponse = {
-	state: string;
-	list: Array<Principal>;
-	notFound: Array<string>;
-	accountId: AccountId;
+/**
+ * see https://jmap.io/spec-calendars.html#calendars
+ */
+export type CalendarAlert = {
+	uid: string;
+	accountId: string;
+	calendarEventId: string;
+	recurrenceId: Date | null;
+	alertId: string;
+};
+
+export type IncludeInAvailabilityType = 'all' | 'attending' | 'none';
+export type CalendarRights = {
+	mayReadFreeBusy: boolean;
+	mayReadItems: boolean;
+	mayWriteAll: boolean;
+	mayWriteOwn: boolean;
+	mayUpdatePrivate: boolean;
+	mayRSVP: boolean;
+	mayAdmin: boolean;
+	mayDelete: boolean;
+};
+
+export type Calendar = {
+	id: string;
+	name: string;
+	description: string | null;
+	sortOrder: number;
+	isVisible: boolean;
+	isSubscribed: boolean;
+	includeInAvailability: IncludeInAvailabilityType;
+	defaultAlertsWithTime: Map<string, CalendarAlert> | null;
+	defaultAlertsWithoutTime: Map<string, CalendarAlert> | null;
+	timeZone: string | null;
+	myRights: CalendarRights;
+	shareWith: Map<string, CalendarRights>;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Status = {};
 
-export async function getQuota(accountId: string, jwt: string): Promise<QuotaResponse> {
-	return request<QuotaResponse>(
+export async function getQuota(accountId: string, jwt: string): Promise<Response<Quota>> {
+	return request<Response<Quota>>(
 		jwt,
 		['https://cyrusimap.org/ns/jmap/quota'],
 		[{ methodName: 'Quota/get', args: { accountId, ids: null } }]
@@ -118,13 +149,12 @@ export async function getSieveScripts(
 	accountId: string,
 	jwt: string,
 	ids: string[] | null = null
-): Promise<SieveScriptResponse> {
-	const response = request<Array<SieveScript>>(
+): Promise<Response<SieveScript>> {
+	return request<Array<SieveScript>>(
 		jwt,
 		['https://cyrusimap.org/ns/jmap/sieve'],
 		[{ methodName: 'SieveScript/get', args: { accountId: accountId, ids } }]
 	);
-	return response;
 }
 
 export async function saveSieveScript(
@@ -200,6 +230,14 @@ export async function getSieveScriptContent(
 		{ headers: { Authorization: `Bearer ${jwt}`, 'Content-Type': 'application/json' } }
 	);
 	return await response.text();
+}
+
+export function getCalendars(jwt: string): Promise<Response<Calendar>> {
+	return request<Response<Calendar>>(
+		jwt,
+		['urn:ietf:params:jmap:calendars'],
+		[{ methodName: 'Calendar/get', args: { ids: null } }]
+	);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

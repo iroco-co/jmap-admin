@@ -90,6 +90,11 @@
 				"title": "Warning: your account is not yet activated",
 				"text": "In order for your email account to work properly, you must: <ol><li><a href=\"/app/account/help#mail_thunderbird_step_by_step\">Configure</a> your email client</li><li>In your inbox, click on the activation link that was sent to you by email</li></ol>"
 			}
+		},
+		"calendars": {
+			"title": "Calendars",
+			"id": "Id",
+			"name": "Name"
 		}
 	}
 }
