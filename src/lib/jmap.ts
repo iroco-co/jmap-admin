@@ -97,6 +97,24 @@ export type Response<T> = {
 };
 
 /**
+ * see https://jmap.io/spec-contacts.html#addressbooks
+ */
+export type AddressBookRights = {
+	mayRead: boolean;
+	mayWrite: boolean;
+	mayAdmin: boolean;
+	mayDelete: boolean;
+};
+
+export type AddressBook = {
+	id: string;
+	name: string;
+	isSubscribed: boolean;
+	shareWith: Map<string, AddressBookRights>;
+	myRights: AddressBookRights;
+};
+
+/**
  * see https://jmap.io/spec-calendars.html#calendars
  */
 export type CalendarAlert = {
@@ -237,6 +255,14 @@ export function getCalendars(jwt: string): Promise<Response<Calendar>> {
 		jwt,
 		['urn:ietf:params:jmap:calendars'],
 		[{ methodName: 'Calendar/get', args: { ids: null } }]
+	);
+}
+
+export function getAddressBooks(jwt: string): Promise<Response<AddressBook>> {
+	return request<Response<AddressBook>>(
+		jwt,
+		['urn:ietf:params:jmap:contacts'],
+		[{ methodName: 'AddressBook/get', args: { ids: null } }]
 	);
 }
 

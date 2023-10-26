@@ -95,6 +95,11 @@
 			"title": "Calendars",
 			"id": "Id",
 			"name": "Name"
+		},
+		"addressbooks": {
+			"title": "Address books",
+			"id": "Id",
+			"name": "Name"
 		}
 	}
 }

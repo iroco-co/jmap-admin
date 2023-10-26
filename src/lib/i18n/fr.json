@@ -95,6 +95,11 @@
 			"title": "Calendriers",
 			"id": "Id",
 			"name": "Nom"
+		},
+		"addressbooks": {
+			"title": "Carnets d'adresses",
+			"id": "Id",
+			"name": "Nom"
 		}
 	}
 }
