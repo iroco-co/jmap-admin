@@ -2,33 +2,34 @@
 	import { Navigation, NavigationItemType, Color } from '@iroco/ui';
 	import { _ } from 'svelte-i18n';
 	import type { PageData } from './$types';
+	import { PUBLIC_ACCOUNT_URL_PREFIX } from '$env/static/public';
 	export let data: PageData;
 </script>
 
 <Navigation
 	navigationItems={[
 		{
-			hrefOrCallback: '/account',
+			hrefOrCallback: `${PUBLIC_ACCOUNT_URL_PREFIX}`,
 			name: $_('sidebar.account'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/addressbooks',
+			hrefOrCallback: `${PUBLIC_ACCOUNT_URL_PREFIX}/addressbooks`,
 			name: $_('sidebar.addressbooks'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/calendars',
+			hrefOrCallback: `${PUBLIC_ACCOUNT_URL_PREFIX}/calendars`,
 			name: $_('sidebar.calendars'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/folders',
+			hrefOrCallback: `${PUBLIC_ACCOUNT_URL_PREFIX}/folders`,
 			name: $_('sidebar.folders'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: '/account/logout',
+			hrefOrCallback: `${PUBLIC_ACCOUNT_URL_PREFIX}/logout`,
 			name: $_('sidebar.logout'),
 			type: NavigationItemType.FORM
 		}
