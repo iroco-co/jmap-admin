@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/private';
 
-export type MethodName = 'Quota/get' | 'SieveScript/get' | 'SieveScript/set';
+export type MethodName = 'Quota/get' | 'SieveScript/get' | 'SieveScript/set' | 'Principal/get';
 
 export type MethodCall = {
 	methodName: MethodName;
@@ -27,6 +27,25 @@ export interface IEmailBodyValue {
 export interface IEmailAddress {
 	name: string;
 	email: string;
+}
+
+/**
+ * See https://jmap.io/spec-sharing.html#principals
+ */
+export type PrincipalType = 'individual' | 'group' | 'resource' | 'location' | 'other';
+
+/**
+ * See https://jmap.io/spec-sharing.html#principals
+ */
+export interface Principal {
+	id: string;
+	type: PrincipalType;
+	name: string;
+	description: string | null;
+	email: string | null;
+	timeZone: string | null;
+	capabilities: Map<string, object>;
+	accounts: string[];
 }
 
 /**
@@ -73,6 +92,13 @@ export type SieveScript = {
 export type SieveScriptResponse = {
 	state: string;
 	list: Array<SieveScript>;
+	notFound: Array<string>;
+	accountId: AccountId;
+};
+
+export type PrincipalResponse = {
+	state: string;
+	list: Array<Principal>;
 	notFound: Array<string>;
 	accountId: AccountId;
 };
