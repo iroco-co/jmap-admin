@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: cimg/node:18.12.1
+      - image: cimg/node:20.8.1
 
     working_directory: /tmp/jmap-admin
     steps:
