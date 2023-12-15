@@ -7,8 +7,14 @@ const config = {
 
 	kit: {
 		paths: {
-			base: '/account/jmap',
-			relative: false
+			// ORIGIN=app.test.iroco.co
+			// base: '/account/jmap',
+			// Pb POST
+			// ORIGIN=app.test.iroco.co/account.jmap
+			// Réécritures nginx
+			// base: '/',
+			// base: '', (default)
+			//relative: false
 		},
 		prerender: {
 			handleMissingId: 'ignore',

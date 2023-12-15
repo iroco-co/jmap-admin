@@ -30,6 +30,8 @@
 			type: NavigationItemType.ANCHOR
 		},
 		{
+			// ORIGIN : app.iroco.co
+			// POST : app.iroro.co/account/jmap -> cross site 🤷‍♂️
 			hrefOrCallback: `${base}/logout`,
 			name: $_('sidebar.logout'),
 			type: NavigationItemType.FORM
