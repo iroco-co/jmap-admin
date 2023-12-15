@@ -7,7 +7,8 @@ const config = {
 
 	kit: {
 		paths: {
-			base: '/account/jmap'
+			base: '/account/jmap',
+			relative: false
 		},
 		prerender: {
 			handleMissingId: 'ignore',
