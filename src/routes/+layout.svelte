@@ -3,33 +3,34 @@
 	import { Navigation, NavigationItemType, Color } from '@iroco/ui';
 	import { _ } from 'svelte-i18n';
 	import type { PageData } from './$types';
+	import { base } from '$app/paths';
 	export let data: PageData;
 </script>
 
 <Navigation
 	navigationItems={[
 		{
-			hrefOrCallback: '',
+			hrefOrCallback: `${base}/`,
 			name: $_('sidebar.account'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: 'addressbooks',
+			hrefOrCallback: `${base}/addressbooks`,
 			name: $_('sidebar.addressbooks'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: 'calendars',
+			hrefOrCallback: `${base}/calendars`,
 			name: $_('sidebar.calendars'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: 'folders',
+			hrefOrCallback: `${base}/folders`,
 			name: $_('sidebar.folders'),
 			type: NavigationItemType.ANCHOR
 		},
 		{
-			hrefOrCallback: 'logout',
+			hrefOrCallback: `${base}/logout`,
 			name: $_('sidebar.logout'),
 			type: NavigationItemType.FORM
 		}
