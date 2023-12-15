@@ -1,6 +1,6 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from '../../../.svelte-kit/types/src/routes';
 import { getCalendars } from '$lib/jmap';
-import { FormStatus } from '../../../domain';
+import { FormStatus } from '../../domain';
 
 export const load: PageServerLoad = async (event) => {
 	const jwt = event.cookies.get('Authorization');

@@ -1,5 +1,5 @@
-import type { PageServerLoad } from './$types';
-import { FormStatus } from '../../domain';
+import type { PageServerLoad } from '../../.svelte-kit/types/src/routes';
+import { FormStatus } from '../domain';
 import { getQuota } from '$lib/jmap';
 
 export const load: PageServerLoad = async (event) => {

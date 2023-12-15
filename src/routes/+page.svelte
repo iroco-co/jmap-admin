@@ -7,7 +7,7 @@
 
 	import type { PageData } from './$types';
 	import Icon from 'svelte-awesome';
-	import { Role, FormStatus } from '../../domain';
+	import { Role, FormStatus } from '../domain';
 	import { humanSize } from '$lib/strings';
 	import { browser } from '$app/environment';
 
@@ -70,7 +70,7 @@
 </section>
 
 <style lang="scss">
-	@use 'node_modules/@iroco/ui/dist/scss/colors';
+	@use '../../node_modules/@iroco/ui/dist/scss/colors';
 	.account {
 		span {
 			font-weight: bold;

@@ -8,25 +8,25 @@
 </script>
 
 <section>
-	<h1>{$_('account.calendars.title')}</h1>
+	<h1>{$_('account.addressbooks.title')}</h1>
 	<table class="data-table">
 		<thead class="data-table__header">
 			<tr>
 				<th class="data-table__header__cell">
-					{$_('account.calendars.id')}
+					{$_('account.addressbooks.id')}
 					<Button size="small" kind="success" id="create-alias-button">
 						<IconMore width="15px" height="15px" />
 					</Button>
 				</th>
 				<th class="data-table__header__cell">
-					{$_('account.calendars.name')}
+					{$_('account.addressbooks.name')}
 				</th>
 				<th class="data-table__header__cell" />
 			</tr>
 		</thead>
 
 		<tbody class="data-table__body">
-			{#each data.calendars as calendar}
+			{#each data.addressbooks as calendar}
 				<tr class="data-table__body__row">
 					<td class="data-table__body__cell">
 						{calendar.id}
@@ -47,7 +47,7 @@
 </section>
 
 <style lang="scss">
-	@use '../../../../node_modules/@iroco/ui/dist/scss/colors';
+	@use '../../../node_modules/@iroco/ui/dist/scss/colors';
 	.data-table {
 		table-layout: fixed;
 		width: 90%;

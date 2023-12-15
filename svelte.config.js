@@ -6,6 +6,9 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		paths: {
+			base: '/account/jmap'
+		},
 		prerender: {
 			handleMissingId: 'ignore',
 			handleHttpError: 'warn'
