@@ -2,9 +2,8 @@
 	import '../app.scss';
 	import { Navigation, NavigationItemType, Color } from '@iroco/ui';
 	import { _ } from 'svelte-i18n';
-	import type { PageData } from './$types';
 	import { base } from '$app/paths';
-	export let data: PageData;
+	import { version } from '$app/environment';
 </script>
 
 <Navigation
@@ -32,7 +31,7 @@
 	]}
 	type="sidebar"
 	title={$_('account.title')}
-	version={data?.version}
+	{version}
 	color={Color.blue}
 />
 
