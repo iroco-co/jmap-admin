@@ -9,7 +9,7 @@
 <Navigation
 	navigationItems={[
 		{
-			hrefOrCallback: '/',
+			hrefOrCallback: '',
 			name: $_('sidebar.account'),
 			type: NavigationItemType.ANCHOR
 		},
