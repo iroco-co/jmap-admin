@@ -10,11 +10,20 @@
 - manage rights for calendars/addressbooks/folders
 - quota management
 
-The architecture is based on SvelteKit back and front with typescript, JMAP server as backend.
+The architecture is based on SvelteKit back and front with typescript, JMAP server as backend. The JMAP backend base URL is given to the app with `JMAP_URL` environment variable.
 
 The goal is to make a graphical interface for what [cyradm](https://www.cyrusimap.org/imap/reference/manpages/systemcommands/cyradm.html) is providing as command line interface.
 
 It is a work in progress.
+
+## Configuration
+
+There are two environment variables to provide to the app:
+
+- `JMAP_URL`: the backend url
+- `JWT_SECRET`: the JWT signing key
+
+Optionally and depending on your web server configuration, `PORT`, `HOST`, `ORIGIN` and other env variables can be set, see the [sveltekit node adapter](https://kit.svelte.dev/docs/adapter-node#environment-variables) configuration.
 
 ## Authenticating
 
