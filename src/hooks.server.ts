@@ -34,6 +34,7 @@ export const handle: Handle = async function ({ event, resolve }) {
 	event.locals.lang = lang;
 	event.locals.email = payload.sub;
 	event.locals.role = payload.role;
+	event.locals.jwt = jwt;
 
 	return resolve(event);
 };

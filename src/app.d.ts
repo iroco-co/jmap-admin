@@ -6,6 +6,7 @@ declare namespace App {
 	// interface Error {}
 	interface Locals {
 		role: import('./domain').Role;
+		jwt: string;
 		email: string;
 		lang: string;
 		version: string;
