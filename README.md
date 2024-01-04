@@ -16,9 +16,11 @@ The goal is to make a graphical interface for what [cyradm](https://www.cyrusima
 
 It is a work in progress.
 
-## Configuration
+## Running & Configuration
 
-There are two environment variables to provide to the app:
+There is a docker image here: [iroco/jmapadmin](https://hub.docker.com/r/iroco/jmapadmin).
+
+Two environment variables are needed by the app:
 
 - `JMAP_URL`: the backend url
 - `JWT_SECRET`: the JWT signing key
