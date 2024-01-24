@@ -155,6 +155,13 @@ export type Calendar = {
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Status = {};
 
+export class Account {
+}
+
+export async function createAccount(adminId: string, jwt: string, accountId: AccountId): Promise<Response<Account>> {
+	return new Promise((resolve) => resolve({state: '', list: [], accountId: '', notfound: []}));
+}
+
 export async function getQuota(accountId: string, jwt: string): Promise<Response<Quota>> {
 	return request<Response<Quota>>(
 		jwt,
