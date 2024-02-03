@@ -17,6 +17,15 @@ vi.mock('$app/environment', (): typeof environment => ({
 	version: 'any'
 }));
 
+vi.mock('$env/dynamic/private', () => {
+	return {
+		env: {
+			JMAP_URL: 'http://nginx:80',
+			JWT_SECRET: 'jwt_secret'
+		}
+	}
+})
+
 // Mock SvelteKit runtime module $app/navigation
 vi.mock('$app/navigation', (): typeof navigation => ({
 	afterNavigate: () => {},

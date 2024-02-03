@@ -1,4 +1,5 @@
 import { env } from '$env/dynamic/private';
+import {logger} from "$lib/server/logger";
 
 export type MethodName =
 	| 'Quota/get'
@@ -6,7 +7,9 @@ export type MethodName =
 	| 'SieveScript/set'
 	| 'Principal/get'
 	| 'Calendar/get'
-	| 'AddressBook/get';
+	| 'AddressBook/get'
+	| 'Admin/createAccount'
+;
 
 export type MethodCall = {
 	methodName: MethodName;
@@ -158,8 +161,12 @@ export type Status = {};
 export class Account {
 }
 
-export async function createAccount(adminId: string, jwt: string, accountId: AccountId): Promise<Response<Account>> {
-	return new Promise((resolve) => resolve({state: '', list: [], accountId: '', notfound: []}));
+export async function createAccount(adminId: string, jwt: string, accountId: string): Promise<Response<Account>> {
+	return request<Response<Quota>>(
+		jwt,
+		['https://cyrusimap.org/ns/jmap/admin'],
+		[{ methodName: 'Admin/createAccount', args: { accountId, ids: null } }]
+	);
 }
 
 export async function getQuota(accountId: string, jwt: string): Promise<Response<Quota>> {
@@ -279,11 +286,19 @@ async function request<ResponseType>(jwt: string, using: string[], jmapMethodCal
 	for (let i = 0; i < jmapMethodCalls.length; i++) {
 		methodCalls.push([jmapMethodCalls[i].methodName, jmapMethodCalls[i].args, String(i)]);
 	}
-	const response = await fetch(env.JMAP_URL, {
-		method: 'POST',
-		headers: { Authorization: `Bearer ${jwt}`, 'Content-Type': 'application/json' },
-		body: JSON.stringify({ using, methodCalls })
-	});
+
+	let response: any;
+	try {
+		response = await fetch(env.JMAP_URL, {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${jwt}`, 'Content-Type': 'application/json' },
+			body: JSON.stringify({ using, methodCalls })
+		});
+	} catch (e) {
+		logger.error("JMAP request failed", e)
+		throw e
+	}
+
 	if (response.status !== 200) {
 		const body = await response.text();
 		throw Error(body);
