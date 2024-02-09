@@ -54,7 +54,7 @@
 		"vitest": "^0.34"
 	},
 	"dependencies": {
-		"@iroco/ui": "^0.62.0",
+		"@iroco/ui": "0.62.0",
 		"jose": "^4.15.2",
 		"luxon": "^3.4.3",
 		"pino": "^8.8.0",
