@@ -1,92 +1,23 @@
-# JMAP Admin
+# iroco.co
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/iroco-co/jmap-admin/tree/main.svg?style=svg&circle-token=82ed4175697e4dc50e2df2f13340eaf032a50561)](https://dl.circleci.com/status-badge/redirect/gh/iroco-co/jmap-admin/tree/main)
+[JMAP](https://jmap.io/) administration front written in svelte. The site has moved [here](https://codeberg.org/iroco/jmap-admin).
 
-[JMAP](https://jmap.io/) administration front written in svelte for:
+---
+As an organization that values the building of digital commons, we do not want to participate to the OpenAI/Microsoft LLM model development. 
 
-- create, remove calendars
-- create, remove addressbooks
-- create, remove shared folders
-- manage rights for calendars/addressbooks/folders
-- quota management
+1. We believe that this model is harmful to [human cognition](https://www.bloomberg.com/news/articles/2025-08-12/ai-eroded-doctors-ability-to-spot-cancer-within-months-in-study), [data privacy](https://jskfellows.stanford.edu/theft-is-not-fair-use-474e11f0d063), the [environment](https://iea.blob.core.windows.net/assets/ed0483fd-aab4-4cf9-b25a-5aa362b56a2f/EnergyandAI.pdf) (Copilot consumes [20.8W of power with 90% loss](https://arxiv.org/abs/2411.11892)), [misinformation](https://www.technologyreview.com/2023/10/04/1080801/generative-ai-boosting-disinformation-and-propaganda-freedom-house/), and all its biases: [colonialism](https://karendhao.com/), [racism](https://www.npr.org/2025/07/09/nx-s1-5462609/grok-elon-musk-antisemitic-racist-content), [sexism](https://www.unwomen.org/en/news-stories/interview/2025/02/how-ai-reinforces-gender-bias-and-what-we-can-do-about-it). We are not against AI, we are against the way AI is implemented with Copilot by GitHub and ultimately Microsoft and OpenAI. We use it (for example for translations) sparingly and conscientiously.
 
-The architecture is based on SvelteKit back and front with typescript, JMAP server as backend. The JMAP backend base URL is given to the app with `JMAP_URL` environment variable.
+2. We do not want to contribute to the [techno-authoritarian stack](https://www.authoritarian-stack.info/) that is developing in the United States. We disapprove of Microsoft's involvement in the [hydrocarbon extraction companies](https://www.woodmac.com/horizons/ai-powered-analysis-oil-field-potential/). We don't understand the [version management policy](https://blog.iroco.co/windows10-the-end/) for Windows 10. Last but not least, we wish to maintain sovereignty over our IT stack.
 
-The goal is to make a graphical interface for what [cyradm](https://www.cyrusimap.org/imap/reference/manpages/systemcommands/cyradm.html) is providing as command line interface.
+Long version is [here](https://blog.iroco.co/pourquoi-quitter-github/).
 
-It is a work in progress.
+---
+Version Française
 
-## Running & Configuration
+En tant qu'organisation qui valorise la construction de communs numériques, nous ne souhaitons pas alimenter les modèles LLM OpenAI/Microsoft. 
 
-There is a docker image here: [iroco/jmapadmin](https://hub.docker.com/r/iroco/jmapadmin).
+1. Nous pensons l'IA générative est délétère, pour la [cognition humaine](https://www.bloomberg.com/news/articles/2025-08-12/ai-eroded-doctors-ability-to-spot-cancer-within-months-in-study), le [respect des données](https://jskfellows.stanford.edu/theft-is-not-fair-use-474e11f0d063), l'[environnement](https://iea.blob.core.windows.net/assets/ed0483fd-aab4-4cf9-b25a-5aa362b56a2f/EnergyandAI.pdf) (l'utilisation de copilot représente une puissance de [20,8W avec 90% de perte](https://arxiv.org/abs/2411.11892)), la [désinformation](https://www.technologyreview.com/2023/10/04/1080801/generative-ai-boosting-disinformation-and-propaganda-freedom-house/), et tous ses biais : le [colonialisme](https://karendhao.com/), le [racisme](https://www.npr.org/2025/07/09/nx-s1-5462609/grok-elon-musk-antisemitic-racist-content), le [sexisme](https://www.unwomen.org/en/news-stories/interview/2025/02/how-ai-reinforces-gender-bias-and-what-we-can-do-about-it). Nous ne sommes pas contre l'IA en tant que telle, nous sommes contre la manière dont l'IA est mise en oeuvre avec Copilot par GitHub  et finalement Microsoft et OpenAI.
 
-Two environment variables are needed by the app:
+2. Nous ne voulons pas alimenter l'[écosystème techno-autoritaire](https://www.authoritarian-stack.info/) qui se met en place aux Etats-Unis. Nous réprouvons l'[aide aux sociétés extractives](https://www.woodmac.com/horizons/ai-powered-analysis-oil-field-potential/) d'hydrocarbures. Nous ne comprenons pas la politique de gestion de [version de Windows 10](https://blog.iroco.co/windows10-the-end/). Surtout, nous souhaitons conserver la souveraineté sur notre environnement informatique.
 
-- `JMAP_URL`: the backend url
-- `JWT_SECRET`: the JWT signing key
-
-Optionally and depending on your web server configuration, `PORT`, `HOST`, `ORIGIN` and other env variables can be set, see the [sveltekit node adapter](https://kit.svelte.dev/docs/adapter-node#environment-variables) configuration.
-
-## Authenticating
-
-The app is stateless, the user should come with a [Json Web Token](https://jwt.io/) in a `Authorization` cookie. The JWT will be used to send [JMAP queries](https://jmap.io/) to the backend. For [Cyrus](https://www.cyrusimap.org/3.6/imap/reference/manpages/configs/imapd.conf.html) the header has to contain the fields,
-
-```json
-{
-	"typ": "JWT",
-	"alg": "HS512"
-}
-```
-
-The payload should have the following structure:
-
-```json
-{
-	"role": 3,
-	"sub": "user@domain.co",
-	"iat": 1704359437,
-	"iss": "urn:iroco:issuer",
-	"exp": 1704361242
-}
-```
-
-The role is corresponding to the typescript enum. It should be `ADMIN(3)` else a `403 Unauthorized` will be thrown:
-
-```typescript
-enum Role {
-	Temporary,
-	Trial,
-	User,
-	Admin,
-	SuperAdmin
-}
-```
-
-A secret should be provided to the app with an environment variable `JWT_SECRET` to check the signature of the token. For more details on accessing the app see [hooks.server.ts](src/hooks.server.ts). For authenticating to the backend, the same secret should be shared with the JMAP or IMAP server (for Cyrus see the `http_jwt_key_dir` section in [imapd.conf](https://www.cyrusimap.org/3.6/imap/reference/manpages/configs/imapd.conf.html)).
-
-## Develop
-
-Installing dépendencies
-
-```shell
-npm i
-```
-
-Run tests
-
-```shell
-npm run test
-```
-
-Run dev server
-
-```shell
-npm run dev
-```
-
-Releasing: the docker is built and pushed by the CI. We use release-it for creating a TAG.
-We use the [semantic versioning](https://semver.org/).
-
-```shell
-npm run release
-```
+La version longue est [ici](https://blog.iroco.co/pourquoi-quitter-github/).
